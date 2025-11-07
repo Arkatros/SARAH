@@ -1,0 +1,19 @@
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px primary solid;
+  background-color: rgb(240, 166, 221);
+  color: rgb(184, 28, 150);
+  padding: 2% 12%;
+  font-size: 2rem;
+}
+
+.navbar button {
+  color: rgb(184, 28, 150);
+}
+
+.navbar button:hover {
+  background-color: rgb(184, 28, 150);
+  color: white;
+}
