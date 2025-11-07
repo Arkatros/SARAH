@@ -4,6 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-navbar',
+  standalone: true,
   imports: [MatToolbarModule, MatButtonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
