@@ -1,0 +1,120 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  
+  <div class="form-row">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>First Name</mat-label>
+      <input matInput type="text" formControlName="name" maxlength="50" />
+      @if (getControl('name')?.touched && getControl('name')?.invalid) {
+        @if (getControl('name')?.hasError('required')) {
+          <mat-error>First name is required.</mat-error>
+        }
+        @if (getControl('name')?.hasError('maxlength')) {
+          <mat-error>Maximum 50 characters.</mat-error>
+        }
+        @if (getControl('name')?.hasError('pattern')) {
+          <mat-error>Only letters and spaces allowed.</mat-error>
+        }
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Last Name</mat-label>
+      <input matInput type="text" formControlName="lastName" maxlength="50" />
+      @if (getControl('lastName')?.touched && getControl('lastName')?.invalid) {
+        @if (getControl('lastName')?.hasError('required')) {
+          <mat-error>Last name is required.</mat-error>
+        }
+        @if (getControl('lastName')?.hasError('maxlength')) {
+          <mat-error>Maximum 50 characters.</mat-error>
+        }
+        @if (getControl('lastName')?.hasError('pattern')) {
+          <mat-error>Only letters and spaces allowed.</mat-error>
+        }
+      }
+    </mat-form-field>
+  </div>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Professional Email</mat-label>
+    <input matInput type="email" formControlName="profesionalEmail" maxlength="50" />
+    @if (getControl('profesionalEmail')?.touched && getControl('profesionalEmail')?.invalid) {
+      @if (getControl('profesionalEmail')?.hasError('required')) {
+        <mat-error>Email is required.</mat-error>
+      }
+      @if (getControl('profesionalEmail')?.hasError('email')) {
+        <mat-error>Invalid email format.</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Phone</mat-label>
+    <input matInput type="text" formControlName="phone" maxlength="14" />
+    @if (getControl('phone')?.touched && getControl('phone')?.invalid) {
+      @if (getControl('phone')?.hasError('required')) {
+        <mat-error>Phone number is required.</mat-error>
+      }
+      @if (getControl('phone')?.hasError('validPhone')) {
+        <mat-error>Invalid phone number format.</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>APC</mat-label>
+    <input matInput type="text" formControlName="apc" minlength="12" maxlength="12" />
+    @if (getControl('apc')?.touched && getControl('apc')?.invalid) {
+      @if (getControl('apc')?.hasError('required')) {
+        <mat-error>APC is required.</mat-error>
+      }
+      @if (getControl('apc')?.hasError('minlength')) {
+        <mat-error>Minimum 12 characters.</mat-error>
+      }
+      @if (getControl('apc')?.hasError('maxlength')) {
+        <mat-error>Maximum 12 characters.</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Registration Number</mat-label>
+    <input matInput type="text" formControlName="registrationNumber" minlength="12" maxlength="12" />
+    @if (getControl('registrationNumber')?.touched && getControl('registrationNumber')?.invalid) {
+      @if (getControl('registrationNumber')?.hasError('required')) {
+        <mat-error>Registration Number is required.</mat-error>
+      }
+      @if (getControl('registrationNumber')?.hasError('minlength')) {
+        <mat-error>Minimum 12 characters.</mat-error>
+      }
+      @if (getControl('registrationNumber')?.hasError('maxlength')) {
+        <mat-error>Maximum 12 characters.</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Employer Name</mat-label>
+    <input matInput type="text" formControlName="employerName" maxlength="50" />
+    @if (getControl('employerName')?.touched && getControl('employerName')?.invalid) {
+      @if (getControl('employerName')?.hasError('required')) {
+        <mat-error>Employer Name is required.</mat-error>
+      }
+      @if (getControl('employerName')?.hasError('maxlength')) {
+        <mat-error>Maximum 50 characters.</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-checkbox formControlName="policies">
+    I accept the privacy policies
+  </mat-checkbox>
+  @if (getControl('policies')?.touched && getControl('policies')?.invalid) {
+    <mat-error>You must accept the policies.</mat-error>
+  }
+
+  <div style="margin-top: 20px;">
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+      Create
+    </button>
+  </div>
+</form>
