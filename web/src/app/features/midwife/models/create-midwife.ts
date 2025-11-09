@@ -3,7 +3,7 @@ export interface CreateMidWife {
     lastName: string;
     email: string;
     phone: string;
-    apc: string;
+    APC: string;
     registrationNumber: string;
     employerName: string;
 }

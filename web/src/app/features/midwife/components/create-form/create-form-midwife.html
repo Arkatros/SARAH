@@ -36,12 +36,12 @@
 
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Professional Email</mat-label>
-    <input matInput type="email" formControlName="profesionalEmail" maxlength="50" />
-    @if (getControl('profesionalEmail')?.touched && getControl('profesionalEmail')?.invalid) {
-      @if (getControl('profesionalEmail')?.hasError('required')) {
+    <input matInput type="email" formControlName="email" maxlength="50" />
+    @if (getControl('email')?.touched && getControl('email')?.invalid) {
+      @if (getControl('email')?.hasError('required')) {
         <mat-error>Email is required.</mat-error>
       }
-      @if (getControl('profesionalEmail')?.hasError('email')) {
+      @if (getControl('email')?.hasError('email')) {
         <mat-error>Invalid email format.</mat-error>
       }
     }
@@ -62,15 +62,15 @@
 
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>APC</mat-label>
-    <input matInput type="text" formControlName="apc" minlength="12" maxlength="12" />
-    @if (getControl('apc')?.touched && getControl('apc')?.invalid) {
-      @if (getControl('apc')?.hasError('required')) {
+    <input matInput type="text" formControlName="APC" minlength="12" maxlength="12" />
+    @if (getControl('APC')?.touched && getControl('APC')?.invalid) {
+      @if (getControl('APC')?.hasError('required')) {
         <mat-error>APC is required.</mat-error>
       }
-      @if (getControl('apc')?.hasError('minlength')) {
+      @if (getControl('APC')?.hasError('minlength')) {
         <mat-error>Minimum 12 characters.</mat-error>
       }
-      @if (getControl('apc')?.hasError('maxlength')) {
+      @if (getControl('APC')?.hasError('maxlength')) {
         <mat-error>Maximum 12 characters.</mat-error>
       }
     }

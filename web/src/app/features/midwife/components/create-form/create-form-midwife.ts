@@ -5,9 +5,10 @@ import { MatCheckbox } from '@angular/material/checkbox';
 import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { CreateMidWife } from '../../models/create-midwife';
 import { MidwifeService } from '../../../../services/midwife-service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-create-form',
+  selector: 'app-create-form-midwife',
   imports: [
     ReactiveFormsModule,
     MatLabel,
@@ -17,20 +18,21 @@ import { MidwifeService } from '../../../../services/midwife-service';
     MatButton,
     MatError
   ],
-  templateUrl: './create-form.html',
-  styleUrl: './create-form.css'
+  templateUrl: './create-form-midwife.html',
+  styleUrl: './create-form-midwife.css'
 })
-export class CreateForm {
+export class CreateFormMidwife {
   public form: FormGroup;
   private _midWifeService: MidwifeService = inject(MidwifeService);
+  private _snackBar = inject(MatSnackBar);
   constructor(private _formBuilder: FormBuilder) {
     this.form = this._formBuilder.group(
       {
         name: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('[a-zA-Z ]*')]],
         lastName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('[a-zA-Z ]*')]],
-        profesionalEmail: ['', [Validators.required, Validators.maxLength(50), Validators.email]],
+        email: ['', [Validators.required, Validators.maxLength(50), Validators.email]],
         phone: ['', [Validators.required, PhoneValidator.validPhone, Validators.maxLength(14)]],
-        apc: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(12)]],
+        APC: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(12)]],
         registrationNumber: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(12)]],
         employerName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('[a-zA-Z ]*')]],
         policies: [false, [Validators.requiredTrue]]
@@ -45,11 +47,21 @@ export class CreateForm {
   onSubmit(): void {
     if (this.form.valid) {
       const createMidwifeData: CreateMidWife = this.form.value;
-      this._midWifeService.createMidwife(createMidwifeData);
-      console.log('Form Submitted!', this.form.value);
-    } else {
-      console.log('Form not valid');
+      this._midWifeService.createMidwife(createMidwifeData).subscribe({
+        next: (response) => {
+          this.openSnackBar(response.message, 'Close');
+          this.form.reset();
+        },
+        error: (error) => {
+          console.error('Error creating midwife:', error.message);
+          this.openSnackBar('Failed to create midwife. Please try again.', 'Close');
+        }
+      });
     }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, { duration: 3000});
   }
 }
 
