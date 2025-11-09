@@ -1,0 +1,33 @@
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--sarah-soft-light);
+  color: var(--sarah-primary);
+  padding: 8px 12%;
+  border-bottom: 2px solid var(--sarah-primary);
+  font-size: 1.25rem;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap: .5rem;
+  font-weight:700;
+  letter-spacing:.3px;
+}
+
+.logo{
+  color: var(--nav-ink);
+}
+
+.navbar button {
+  color: var(--sarah-primary);
+  font-weight: 600;
+}
+
+.navbar button:hover {
+  background: var(--nav-ink);
+  color:#fff;
+}
