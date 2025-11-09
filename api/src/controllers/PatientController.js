@@ -1,5 +1,6 @@
 import * as service from "../services/patientService.js";
 import SarahError from "../utils/sarahError.js";
+
 export const invitePatientController = async (req, res) => {
   const request = req.body;
   try {

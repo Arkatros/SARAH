@@ -1,4 +1,6 @@
 import nodemailer from "nodemailer";
+import { getMidwifeWelcomeSubject, getMidwifeWelcomeText } from "../templates/mailBienvenidaSimple.js";
+
 const baseurl = "http://127.0.0.1:3000/api/users/active/";
 
 async function encodeMailToLink(email) {
@@ -21,13 +23,15 @@ export async function sendMail(data) {
     console.log(data.temporalpassword);
     const activationLink = `${baseurl}${encodedlink}`;
     console.log(encodedlink);
+    
+    const subject = getMidwifeWelcomeSubject();
+    const text = getMidwifeWelcomeText(data.name, data.temporalPass, activationLink);
+    
     const mailOptions = {
         from: process.env.GOOGLE_MAIL,
         to: data.email,
-        subject: "Midwife Password setting",
-        text: `Hi ${data.name} your temporal password is ${data.temporalPass}
-      go to this link to active your account ${activationLink}
-          `,
+        subject: subject,
+        text: text,
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
@@ -39,25 +43,21 @@ export async function sendMail(data) {
     });
 }
 
-
-
-
 export async function genericSendMail(toEmail, subject, body) {
-    const mailOptions = {
-        from: process.env.GOOGLE_MAIL,
-        to: toEmail,
-        subject: subject,
-        html: body, 
-    };
-    try {
-        const info = await transporter.sendMail(mailOptions);
-        console.log("Email sent:", info.response);
-        return info;
-    } catch (error) {
-        console.error("Error sending email:", error);
-        throw new Error("Failed to send email");
-    }
-
+  const mailOptions = {
+      from: process.env.GOOGLE_MAIL,
+      to: toEmail,
+      subject: subject,
+      html: body, 
+  };
+  try {
+      const info = await transporter.sendMail(mailOptions);
+      console.log("Email sent:", info.response);
+      return info;
+  } catch (error) {
+      console.error("Error sending email:", error);
+      throw new Error("Failed to send email");
+  }
 }
 
 
