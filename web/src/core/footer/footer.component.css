@@ -1,0 +1,15 @@
+div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 0.8rem;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #ccc 20%, #ccc 80%, transparent);
+}
