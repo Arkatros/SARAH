@@ -21,21 +21,42 @@ model User {
   email     String    @unique
   phone     String
   password  String?
-  role      String   @default("USER")
+  role      String    @default("USER")
   midwife   Midwife?  @relation("MidwifeToUser")
-  // patient   Patient? @relation("PatientToUser")
+  patient   Patient?  @relation("PatientToUser")
   addresses Address[]
 }
 
 
 model Midwife {
-  id                 Int     @id @default(autoincrement())
+  id                 Int       @id @default(autoincrement())
   APC                String
   registrationNumber String
   employerName       String
   isActive           Boolean
-  userId             Int     @unique
-  user               User    @relation("MidwifeToUser", fields: [userId], references: [id])
+  userId             Int       @unique
+  user               User      @relation("MidwifeToUser", fields: [userId], references: [id])
+  patients           Patient[]
+}
+
+model Patient {
+  id                    Int      @id @default(autoincrement())
+  dateOfBirth           DateTime?
+  ethnicity             String?
+  residentialStatus     String?
+  partnerName           String?
+  partnerDateOfBirth    DateTime?
+  partnerAddress        String?
+  partnerEmail          String?
+  partnerPhone          String?
+  GPName                String?
+  GPEmail               String?
+  GPPhone               String?
+  isActive              Boolean  @default(true)
+  userId                Int      @unique
+  user                  User     @relation("PatientToUser", fields: [userId], references: [id])
+  midWifeId             Int
+  midWife               Midwife  @relation(fields: [midWifeId], references: [id])
 }
 
 model Address {

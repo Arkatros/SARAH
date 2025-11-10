@@ -1,5 +1,6 @@
 import express from "express";
 import userRoutes from "./routes/userRoutes.js";
+import patientRoutes from "./routes/patientRoutes.js";
 import { config } from "dotenv";
 config();
 const secret = process.env.SECRET_KEY;
@@ -19,6 +20,7 @@ app.use(cors(corsOptions)); //No termina funcionando el cors,puede ser retirado 
 
 app.use(express.json());
 app.use("/api/users", userRoutes);
+app.use("/api/patients", patientRoutes);
 app.listen(PORT, HOST, () => {
   console.log(`Escuchando en http://${HOST}:${PORT}`);
 });
