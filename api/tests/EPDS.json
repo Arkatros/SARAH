@@ -1,0 +1,106 @@
+{
+  "testCode": "EPDS",
+  "questions": [
+    {
+      "number": 1,
+      "description": "I have been able to laugh and see the funny side of things.",
+      "responses": [
+        { "description": "As much as I always could", "value": 0 },
+        { "description": "Not quite so much now", "value": 1 },
+        { "description": "Definitely not so much now", "value": 2 },
+        { "description": "Not at all", "value": 3 }
+      ]
+    },
+    {
+      "number": 2,
+      "description": "I have looked forward with enjoyment to things.",
+      "responses": [
+        { "description": "As much as I ever did", "value": 0 },
+        { "description": "Rather less than I used to", "value": 1 },
+        { "description": "Definitely less than I used to", "value": 2 },
+        { "description": "Hardly at all", "value": 3 }
+      ]
+    },
+    {
+      "number": 3,
+      "description": "I have blamed myself unnecessarily when things went wrong.",
+      "responses": [
+        { "description": "Yes, most of the time", "value": 3 },
+        { "description": "Yes, some of the time", "value": 2 },
+        { "description": "Not very often", "value": 1 },
+        { "description": "No, never", "value": 0 }
+      ]
+    },
+    {
+      "number": 4,
+      "description": "I have been anxious or worried for no good reason.",
+      "responses": [
+        { "description": "No, not at all", "value": 0 },
+        { "description": "Hardly ever", "value": 1 },
+        { "description": "Yes, sometimes", "value": 2 },
+        { "description": "Yes, very often", "value": 3 }
+      ]
+    },
+    {
+      "number": 5,
+      "description": "I have felt scared or panicky for no very good reason.",
+      "responses": [
+        { "description": "No, not at all", "value": 0 },
+        { "description": "No, not much", "value": 1 },
+        { "description": "Yes, sometimes", "value": 2 },
+        { "description": "Yes, quite a lot", "value": 3 }
+      ]
+    },
+    {
+      "number": 6,
+      "description": "Things have been getting on top of me.",
+      "responses": [
+        { "description": "No, I have been coping as well as ever", "value": 0 },
+        { "description": "No, most of the time I have coped quite well", "value": 1 },
+        { "description": "Yes, sometimes I haven’t been coping as well as usual", "value": 2 },
+        { "description": "Yes, most of the time I haven’t been able to cope at all", "value": 3 }
+      ]
+    },
+    {
+      "number": 7,
+      "description": "I have been so unhappy that I have had difficulty sleeping.",
+      "responses": [
+        { "description": "No, not at all", "value": 0 },
+        { "description": "Not very often", "value": 1 },
+        { "description": "Yes, sometimes", "value": 2 },
+        { "description": "Yes, most of the time", "value": 3 }
+      ]
+    },
+    {
+      "number": 8,
+      "description": "I have felt sad or miserable.",
+      "responses": [
+        { "description": "No, not at all", "value": 0 },
+        { "description": "Not very often", "value": 1 },
+        { "description": "Yes, quite often", "value": 2 },
+        { "description": "Yes, most of the time", "value": 3 }
+      ]
+    },
+    {
+      "number": 9,
+      "description": "I have been so unhappy that I have been crying.",
+      "responses": [
+        { "description": "No, never", "value": 0 },
+        { "description": "Only occasionally", "value": 1 },
+        { "description": "Yes, quite often", "value": 2 },
+        { "description": "Yes, most of the time", "value": 3 }
+      ]
+    },
+    {
+      "number": 10,
+      "description": "The thought of harming myself has occurred to me.",
+      "responses": [
+        { "description": "Never", "value": 0 },
+        { "description": "Hardly ever", "value": 1 },
+        { "description": "Sometimes", "value": 2 },
+        { "description": "Yes, quite often", "value": 3 }
+      ]
+    }
+  ]
+}
+
