@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { CreateFormMidwife } from "../../../midwife/components/create-form/create-form-midwife";
+import { CardCreateMidwife } from "../../components/card-create-midwife/card-create-midwife";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CreateFormMidwife],
+  imports: [ CardCreateMidwife],
   templateUrl: './admin-dashboard.html',
   styleUrl: './admin-dashboard.css'
 })

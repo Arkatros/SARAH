@@ -34,7 +34,7 @@ export class InvitePatient {
   onSubmit(): void {
     if (this.form.valid) {
       const invitation: InvitePatientModel = this.form.value;
-      this._patienService.invitePatien(invitation).subscribe({
+      this._patienService.invitePatient(invitation).subscribe({
         next: (response) => {
           this.openSnackBar(response.message, 'Close');
           this.form.reset();

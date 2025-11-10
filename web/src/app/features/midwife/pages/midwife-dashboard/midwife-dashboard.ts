@@ -7,8 +7,6 @@ import { CardTable } from "../../components/card-table/card-table";
 @Component({
   selector: 'app-midwife-dashboard',
   imports: [
-    MatGridList,
-    MatGridTile,
     CardHome,
     CardInvitation,
     CardTable

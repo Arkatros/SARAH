@@ -12,7 +12,7 @@ export class PatientService {
   apiUrl: string = environment.apiUrl;
   private _httpClient: HttpClient = inject(HttpClient);
 
-  invitePatien(invitation: InvitePatientModel) : Observable<ApiResponse<null>> {
+  invitePatient(invitation: InvitePatientModel) : Observable<ApiResponse<null>> {
     return this._httpClient.post<ApiResponse<null>>(`${this.apiUrl}/users/patient/invite`, { invitation });
   }
 }

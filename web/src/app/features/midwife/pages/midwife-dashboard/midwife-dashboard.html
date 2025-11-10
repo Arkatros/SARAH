@@ -1,11 +1,11 @@
-<mat-grid-list cols="2" rowHeight="280px"  gutterSize="4px">
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <app-card-home></app-card-home>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="3">
-        <app-card-table></app-card-table>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="2">
-        <app-card-invitation></app-card-invitation>
-    </mat-grid-tile>
-</mat-grid-list>
+<div class="dashboard-grid">
+  <div class="tile home-tile">
+    <app-card-home></app-card-home>
+  </div>
+  <div class="tile table-tile">
+    <app-card-table></app-card-table>
+  </div>
+  <div class="tile invite-tile">
+    <app-card-invitation></app-card-invitation>
+  </div>
+</div>

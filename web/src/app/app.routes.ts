@@ -6,7 +6,7 @@ import { MidwifeDashboard } from './features/midwife/pages/midwife-dashboard/mid
 
 export const routes: Routes = [
     { path: "", component: Home },
-    { path: '**', component: NotFound } ,
     { path: 'admin', component: AdminDashboard },
-    { path: 'midwife', component: MidwifeDashboard }
+    { path: 'midwife', component: MidwifeDashboard },
+    { path: '**', component: NotFound }
 ];
