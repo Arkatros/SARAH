@@ -5,7 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
@@ -35,7 +35,7 @@ model Midwife {
   employerName       String
   isActive           Boolean
   userId             Int       @unique
-  user               User      @relation("MidwifeToUser", fields: [userId], references: [id])
+  user               User      @relation("MidwifeToUser", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   patients           Patient[]
 }
 
@@ -54,9 +54,9 @@ model Patient {
   GPPhone               String?
   isActive              Boolean  @default(true)
   userId                Int      @unique
-  user                  User     @relation("PatientToUser", fields: [userId], references: [id])
+  user                  User     @relation("PatientToUser", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   midWifeId             Int
-  midWife               Midwife  @relation(fields: [midWifeId], references: [id])
+  midWife               Midwife  @relation(fields: [midWifeId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model Address {
@@ -66,11 +66,11 @@ model Address {
   city    String
   country String
   userId  Int
-  user    User   @relation(fields: [userId], references: [id])
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model TestQuestion {
-  id                Int @id @default(autoincrement())
+  id                Int      @id @default(autoincrement())
   description       String
   test              String
   number            Int
