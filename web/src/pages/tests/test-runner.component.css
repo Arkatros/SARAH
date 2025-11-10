@@ -1,0 +1,6 @@
+.question { margin-bottom: 16px; }
+.options { display: flex; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+.subquestions { padding-left: 12px; border-left: 2px solid #eee; margin-top: 8px; }
+.submit { margin-top: 16px; }
+
+

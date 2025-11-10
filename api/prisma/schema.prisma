@@ -48,20 +48,14 @@ model Address {
   user    User   @relation(fields: [userId], references: [id])
 }
 
-enum TestType {
-  ANRQ
-  EPDS
-  PASS
-}
-
 model TestQuestion {
   id                Int @id @default(autoincrement())
   description       String
-  test              TestType
+  test              String
   number            Int
   subquestionNumber Int?
   parentId          Int?
-  parent            TestQuestion? @relation("QuestionHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  parent            TestQuestion? @relation("QuestionHierarchy", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   children          TestQuestion[] @relation("QuestionHierarchy")
 
   responses         QuestionResponse[]
