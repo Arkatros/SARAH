@@ -8,5 +8,9 @@ export const routes: Routes = [
     { path: "", component: Home },
     { path: 'admin', component: AdminDashboard },
     { path: 'midwife', component: MidwifeDashboard },
-    { path: '**', component: NotFound }
+    /*
+    { path: 'admin', component: AdminDashboard, canActivate: [authGuard, roleGuard], data: { roles: [Roles.ADMIN] } },
+    { path: 'midwife', component: MidwifeDashboard, canActivate: [authGuard, roleGuard], data: { roles: [Roles.MIDWIFE] } },
+    */
+    { path: '**', component: NotFound } ,
 ];
