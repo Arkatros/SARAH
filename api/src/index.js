@@ -2,6 +2,7 @@ import express from "express";
 import userRoutes from "./routes/userRoutes.js";
 import patientRoutes from "./routes/patientRoutes.js";
 import { config } from "dotenv";
+import testRoutes from "./routes/testRoutes.js";
 config();
 const secret = process.env.SECRET_KEY;
 const app = express();
@@ -21,6 +22,7 @@ app.use(cors(corsOptions)); //No termina funcionando el cors,puede ser retirado 
 app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/patients", patientRoutes);
+app.use("/api/tests", testRoutes);
 app.listen(PORT, HOST, () => {
   console.log(`Escuchando en http://${HOST}:${PORT}`);
 });
