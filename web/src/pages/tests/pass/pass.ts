@@ -1,11 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TestApiService, TestQuestion } from '../../../core/services/test-api.service';
 
 @Component({
   selector: 'app-pass',
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './pass.html',
   styleUrl: './pass.css'
 })
-export class PASS {
+export class PASS implements OnInit {
+  private readonly api = inject(TestApiService);
+  protected readonly questions = signal<TestQuestion[]>([]);
+  protected readonly loaded = signal<boolean>(false);
+  protected readonly answers: Record<string, number> = {};
 
+  ngOnInit(): void {
+    this.api.getQuestions('PASS').subscribe({
+      next: (qs) => { this.questions.set(qs); this.loaded.set(true); },
+      error: () => { this.questions.set([]); this.loaded.set(true); }
+    });
+  }
 }

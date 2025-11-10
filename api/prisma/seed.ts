@@ -1,4 +1,5 @@
-import { PrismaClient, TestType } from '@prisma/client';
+/// <reference types="node" />
+import { PrismaClient } from '../generated/prisma/client.ts';
 import { promises as fs } from 'fs';
 import path from 'path';
 
@@ -28,10 +29,10 @@ type SeedFile = {
 
 const prisma = new PrismaClient();
 
-const TEST_CODE_TO_ENUM: Record<string, TestType> = {
-  ANRQ: TestType.ANRQ,
-  EPDS: TestType.EPDS,
-  PASS: TestType.PASS,
+const TEST_CODE_TO_STRING: Record<string, string> = {
+  ANRQ: 'ANRQ',
+  EPDS: 'EPDS',
+  PASS: 'PASS',
 };
 
 async function ensureResponse(description: string) {
@@ -43,7 +44,7 @@ async function ensureResponse(description: string) {
 }
 
 async function ensureQuestion(params: {
-  test: TestType;
+  test: string;
   number: number;
   description: string;
   subquestionNumber?: number | null;
@@ -84,7 +85,7 @@ async function upsertQuestionResponses(questionId: number, responses: SeedRespon
 async function seedFromFile(jsonPath: string) {
   const raw = await fs.readFile(jsonPath, 'utf8');
   const data: SeedFile = JSON.parse(raw);
-  const test = TEST_CODE_TO_ENUM[data.testCode];
+  const test = TEST_CODE_TO_STRING[data.testCode];
   if (!test) {
     throw new Error(`Test code inválido en ${jsonPath}: ${data.testCode}`);
   }
