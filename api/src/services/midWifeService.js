@@ -20,7 +20,6 @@ export const createMidwifeService = async (data) => {
   } = data;
   const salt = await bcrypt.genSalt(10);
 
-  const temporalPass = await generatePassword();
   console.log(data);
   const hashedPassword = await bcrypt.hash(temporalPass, salt);
   const existingUser = await findByEmail(email);
