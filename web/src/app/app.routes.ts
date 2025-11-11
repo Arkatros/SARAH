@@ -19,7 +19,6 @@ export const routes: Routes = [
     { path: 'admin', component: AdminDashboard, canActivate: [authGuard, roleGuard], data: { roles: [Roles.ADMIN] } },
     { path: 'midwife', component: MidwifeDashboard, canActivate: [authGuard, roleGuard], data: { roles: [Roles.MIDWIFE] } },
     */
-    { path: '**', component: NotFound }
     { path: "patient/register", component: PatientRegisterComponent },
     { path: '**', component: NotFound } // <---- Si van a registrar rutas, esta DEBE SER LA ULTIMA EN LA LISTA SIEMPRE
 ];
