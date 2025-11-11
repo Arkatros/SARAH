@@ -8,7 +8,11 @@ export const loginMidwife = async (req, res) => {
       message: "Succesfull authentication",
       data: tokengen,
     });
-  } else {
+  } else if (tokengen = null) {
+    res.status(401).json({ mensaje: "Midwife is not active", data: null });
+
+  }
+  else {
     res.status(401).json({ mensaje: "Credenciales inválidas", data: null });
   }
 };
