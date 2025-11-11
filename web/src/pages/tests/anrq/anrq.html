@@ -1,22 +1,66 @@
-<section *ngIf="loaded(); else loading">
-  <h2>ANRQ</h2>
-  <div *ngFor="let q of questions()">
-    <h3>{{ q.number }}. {{ q.description }}</h3>
-    <div>
-      <label *ngFor="let r of q.responses">
-        <input type="radio" name="q-{{ q.number }}" [value]="r.value" [(ngModel)]="answers['q-'+q.number]" />
-        {{ r.description }}
-      </label>
+<section class="test-wrapper" *ngIf="loaded(); else loading">
+    <header class="test-header">
+        <div class="brand">
+            <h2 class="test-title">Antenatal (Psychosocial) Risk Questionnaire (ANRQ) – Client</h2>
+            <div class="badge">
+                <span class="badge-top">Best Practice</span>
+                <span class="badge-center">COPE</span>
+                <span class="badge-bottom">Guideline</span>
+            </div>
+        </div>
+        <p class="lead">
+            The questions below are designed to help you and your clinician understand whether you may benefit from some extra support during this time of change. You may find some questions challenging, but please choose the answers that best apply to you. There are no right or wrong answers. <br><br>
+            Please complete all questions, unless instructed to SKIP a question. Once you have completed the questions, your clinician will discuss your responses with you. If you have any concerns about any of the questions, please let your clinician know.</p>
+    </header>
+
+    <div class="test-card">
+        <div class="question" *ngFor="let q of questions()">
+            <h3 *ngIf="q.number !== 8">
+                <span class="q-label">Q{{ q.number }}.</span>
+                <span [innerHTML]="q.description"></span>
+            </h3>
+            <h3 *ngIf="q.number === 8">
+                <span class="q-label">Q8.</span>
+                Have you <b>ever</b> been
+                <label class="inline-check">
+                    <input type="checkbox" [(ngModel)]="multi['q-8-s-1-sexually']" />
+                    sexually
+                </label>
+                or
+                <label class="inline-check">
+                    <input type="checkbox" [(ngModel)]="multi['q-8-s-1-physically']" />
+                    physically
+                </label>
+                abused?
+            </h3>
+            <div class="options">
+                <label *ngFor="let r of q.responses">
+                    <input type="radio" name="q-{{ q.number }}" [value]="r.value"
+                        [(ngModel)]="answers['q-'+q.number]" />
+                    {{ r.description }}
+                </label>
+            </div>
+
+            <div class="subquestions" *ngIf="q.subquestions?.length">
+                <ng-container *ngFor="let s of q.subquestions">
+                    <div class="sub-block" *ngIf="showThisSub(q, s.subquestionNumber)">
+                        <h4>
+                            <span class="q-label">Q{{ q.number }}.{{ letterFor(s.subquestionNumber) }}</span>
+                            <span [innerHTML]="s.description"></span>
+                        </h4>
+                        <div class="options">
+                            <label *ngFor="let r of s.responses">
+                                <input type="radio" name="q-{{ q.number }}-s-{{ s.subquestionNumber }}"
+                                    [value]="r.value" [(ngModel)]="answers['q-'+q.number+'-s-'+s.subquestionNumber]" />
+                                {{ r.description }}
+                            </label>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
     </div>
-    <div *ngIf="q.subquestions?.length">
-      <div *ngFor="let s of q.subquestions">
-        <h4>{{ q.number }}.{{ s.subquestionNumber }} {{ s.description }}</h4>
-        <label *ngFor="let r of s.responses">
-          <input type="radio" name="q-{{ q.number }}-s-{{ s.subquestionNumber }}" [value]="r.value" [(ngModel)]="answers['q-'+q.number+'-s-'+s.subquestionNumber]" />
-          {{ r.description }}
-        </label>
-      </div>
-    </div>
-  </div>
 </section>
-<ng-template #loading><p>Loading...</p></ng-template>
+<ng-template #loading>
+    <p>Loading...</p>
+</ng-template>
