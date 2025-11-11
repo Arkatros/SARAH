@@ -1,6 +1,7 @@
 import { findByEmail } from "../repositories/midwifeRepository.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+
 const secret = process.env.SECRET_KEY;
 
 export const loginMidwife = async (data) => {

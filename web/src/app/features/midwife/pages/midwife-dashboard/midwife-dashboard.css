@@ -1,0 +1,108 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    box-sizing: border-box;
+    padding: 15px;
+    height: 100%;
+    width: 100%;
+}
+
+.dashboard-grid {
+    width: 100%;
+    max-width: 1500px;
+    height: 100%;
+    max-height: 1000px;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+        "home table table"
+        "invite table table"
+        "invite table table";
+    align-items: stretch;
+    justify-items: stretch;
+    box-sizing: border-box;
+}
+
+.home-tile {
+    grid-area: home;
+}
+
+.table-tile {
+    grid-area: table;
+}
+
+.invite-tile {
+    grid-area: invite;
+}
+
+.tile {
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    min-width: 0;
+}
+
+.tile>* {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+@media (max-width: 1099px) and (min-width: 700px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-areas:
+            "home table"
+            "invite table"
+            "invite table";
+    }
+
+    .home-tile {
+        grid-area: home;
+    }
+
+    .table-tile {
+        grid-area: table;
+    }
+
+    .invite-tile {
+        grid-area: invite;
+    }
+}
+
+@media (max-width: 699px) {
+    :host {
+        align-items: start;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "home"
+            "invite"
+            "table";
+        gap: 15px;
+    }
+
+    .home-tile {
+        grid-area: home;
+    }
+
+    .invite-tile {
+        grid-area: invite;
+    }
+
+    .table-tile {
+        grid-area: table;
+    }
+
+    :host {
+        padding: 12px;
+    }
+}

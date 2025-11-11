@@ -1,0 +1,10 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    box-sizing: border-box;
+    padding: 15px;
+    height: 100%;
+    width: 100%;
+}
