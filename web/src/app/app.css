@@ -19,5 +19,7 @@ router-outlet {
 }
 
 app-footer {
+    margin-top: auto;
     flex-shrink: 0;
+    padding: 20px 0;
 }

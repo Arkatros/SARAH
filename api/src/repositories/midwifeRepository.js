@@ -44,7 +44,6 @@ export const isActiveMidwife = async (email) => {
   }
   return false
 }
-
 export const findByEmailMidwife = async (email) => {
   const userWithMidwife = await prisma.user.findUnique({
     where: { email },

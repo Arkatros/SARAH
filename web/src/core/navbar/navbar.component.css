@@ -13,12 +13,20 @@
 .brand{
   display:flex;
   align-items:center;
-  gap: .5rem;
+  gap: .2rem;
   font-weight:700;
   letter-spacing:.3px;
 }
 
+.brand:hover{
+  cursor: pointer;
+}
+
 .logo{
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  font-size: 30px; 
   color: var(--nav-ink);
 }
 

@@ -1,0 +1,151 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Registro de paciente</mat-card-title>
+    </mat-card-header>
+    
+    <hr class="linea-gradiente">
+
+    <mat-card-content>
+      <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+        
+        <!-- Datos personales -->
+        <div class="section">
+          <h3 class="section-title">Datos personales</h3>
+          
+          <div class="form-row">
+            <mat-form-field>
+              <mat-label>Nombre *</mat-label>
+              <input matInput formControlName="name">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Apellido *</mat-label>
+              <input matInput formControlName="lastName">
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field>
+              <mat-label>Email *</mat-label>
+              <input matInput type="email" formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Teléfono *</mat-label>
+              <input matInput formControlName="phone">
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field>
+              <mat-label>Contraseña</mat-label>
+              <input matInput type="password" formControlName="password">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>ID partera *</mat-label>
+              <input matInput type="number" formControlName="midWifeId">
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field>
+              <mat-label>Fecha de nacimiento</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Etnia</mat-label>
+              <input matInput formControlName="ethnicity">
+            </mat-form-field>
+          </div>
+
+          <mat-form-field class="full-width">
+            <mat-label>Estado residencial</mat-label>
+            <input matInput formControlName="residentialStatus">
+          </mat-form-field>
+        </div>
+
+        <hr>
+
+        <!-- Datos pareja -->
+        <div class="section">
+          <h3 class="section-title">Datos de la pareja (Opcional)</h3>
+          
+          <div class="form-row">
+            <mat-form-field>
+              <mat-label>Nombre de la pareja</mat-label>
+              <input matInput formControlName="partnerName">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Fecha de nacimiento</mat-label>
+              <input matInput [matDatepicker]="partnerPicker" formControlName="partnerDateOfBirth">
+              <mat-datepicker-toggle matIconSuffix [for]="partnerPicker"></mat-datepicker-toggle>
+              <mat-datepicker #partnerPicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field class="full-width">
+            <mat-label>Dirección de la pareja</mat-label>
+            <input matInput formControlName="partnerAddress">
+          </mat-form-field>
+
+          <div class="form-row">
+            <mat-form-field>
+              <mat-label>Email de la pareja</mat-label>
+              <input matInput type="email" formControlName="partnerEmail">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Teléfono de la pareja</mat-label>
+              <input matInput formControlName="partnerPhone">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <hr>
+
+        <!-- Datos médico -->
+        <div class="section">
+          <h3 class="section-title">Médico de cabecera (Opcional)</h3>
+          
+          <mat-form-field class="full-width">
+            <mat-label>Nombre del médico</mat-label>
+            <input matInput formControlName="GPName">
+          </mat-form-field>
+
+          <div class="form-row">
+            <mat-form-field>
+              <mat-label>Email del médico</mat-label>
+              <input matInput type="email" formControlName="GPEmail">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Teléfono del médico</mat-label>
+              <input matInput formControlName="GPPhone">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button mat-raised-button type="button" (click)="onReset()" [disabled]="isLoading">
+            Limpiar
+          </button>
+          
+          <button mat-raised-button type="submit" class="btn-primary" [disabled]="isLoading || !patientForm.valid">
+            @if(isLoading) {
+              <mat-spinner diameter="20"></mat-spinner>
+            } @else {
+            <span>Registrar paciente</span>
+            }
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
