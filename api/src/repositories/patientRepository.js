@@ -22,8 +22,13 @@ export const createPatient = async ({ userData, patientData }) => {
       GPEmail: patientData.GPEmail || null,
       GPPhone: patientData.GPPhone || null,
       isActive: true,
-      midWifeId: patientData.midWifeId,
 
+      // La midWife debe existir
+      midWife: {
+        connect: { id: patientData.midWifeId }
+      },
+
+      // Crea un usuario nuevo
       user: {
         create: {
           name: userData.name,

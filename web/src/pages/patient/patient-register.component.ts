@@ -9,6 +9,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PatientService } from '../../core/services/patient.service';
 import { CreatePatientDTO } from '../../models/patient.model';
 
@@ -25,7 +26,8 @@ import { CreatePatientDTO } from '../../models/patient.model';
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './patient-register.component.html',
   styleUrls: ['./patient-register.component.css']
@@ -40,28 +42,29 @@ export class PatientRegisterComponent {
   private snackBar = inject(MatSnackBar);
 
   constructor() {
+    // Creamos el form
     this.patientForm = this.fb.group({
-      // Datos obligatorios
+      // Datos requeridos
       name: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       midWifeId: ['', Validators.required],
       
-      // Datos opcionales
+      // Opcionales del paciente
       password: [''],
       dateOfBirth: [''],
       ethnicity: [''],
       residentialStatus: [''],
       
-      // Datos de la pareja
+      // Opcionales de la pareja
       partnerName: [''],
       partnerDateOfBirth: [''],
       partnerAddress: [''],
       partnerEmail: [''],
       partnerPhone: [''],
       
-      // Datos del médico
+      // Opcionales del médico
       GPName: [''],
       GPEmail: [''],
       GPPhone: ['']
@@ -69,48 +72,49 @@ export class PatientRegisterComponent {
   }
 
   onSubmit() {
+    // Validamos el form
     if (this.patientForm.invalid) {
-      this.showMessage('Por favor completa los campos obligatorios', 'error');
+      this.showMessage('Por favor complete los campos obligatorios (*)', 'error');
       return;
     }
 
     this.isLoading = true;
-    const formData = this.patientForm.value;
-
-    // campos obligatorios
+    
+    // Obtenemos todos los valores del formulario
+    const formValues = this.patientForm.value;
+    
+    // Crear objeto con datos obligatorios
     const patientData: CreatePatientDTO = {
-      name: formData.name,
-      lastName: formData.lastName,
-      email: formData.email,
-      phone: formData.phone,
-      midWifeId: Number(formData.midWifeId),
+      name: formValues.name,
+      lastName: formValues.lastName,
+      email: formValues.email,
+      phone: formValues.phone,
+      midWifeId: Number(formValues.midWifeId)
     };
 
-    // campos opcionales (solo si tienen valor)
-    if (formData.password) patientData.password = formData.password;
-    if (formData.dateOfBirth) patientData.dateOfBirth = formData.dateOfBirth;
-    if (formData.ethnicity) patientData.ethnicity = formData.ethnicity;
-    if (formData.residentialStatus) patientData.residentialStatus = formData.residentialStatus;
-    if (formData.partnerName) patientData.partnerName = formData.partnerName;
-    if (formData.partnerDateOfBirth) patientData.partnerDateOfBirth = formData.partnerDateOfBirth;
-    if (formData.partnerAddress) patientData.partnerAddress = formData.partnerAddress;
-    if (formData.partnerEmail) patientData.partnerEmail = formData.partnerEmail;
-    if (formData.partnerPhone) patientData.partnerPhone = formData.partnerPhone;
-    if (formData.GPName) patientData.GPName = formData.GPName;
-    if (formData.GPEmail) patientData.GPEmail = formData.GPEmail;
-    if (formData.GPPhone) patientData.GPPhone = formData.GPPhone;
+    // campos opcionales
+    if (formValues.password) patientData.password = formValues.password;
+    if (formValues.dateOfBirth) patientData.dateOfBirth = formValues.dateOfBirth;
+    if (formValues.ethnicity) patientData.ethnicity = formValues.ethnicity;
+    if (formValues.residentialStatus) patientData.residentialStatus = formValues.residentialStatus;
+    if (formValues.partnerName) patientData.partnerName = formValues.partnerName;
+    if (formValues.partnerDateOfBirth) patientData.partnerDateOfBirth = formValues.partnerDateOfBirth;
+    if (formValues.partnerAddress) patientData.partnerAddress = formValues.partnerAddress;
+    if (formValues.partnerEmail) patientData.partnerEmail = formValues.partnerEmail;
+    if (formValues.partnerPhone) patientData.partnerPhone = formValues.partnerPhone;
+    if (formValues.GPName) patientData.GPName = formValues.GPName;
+    if (formValues.GPEmail) patientData.GPEmail = formValues.GPEmail;
+    if (formValues.GPPhone) patientData.GPPhone = formValues.GPPhone;
 
     this.patientService.registerPatient(patientData).subscribe({
       next: (response) => {
-        console.log('Paciente registrado:', response);
-        this.showMessage('Paciente registrado exitosamente', 'success');
+        this.showMessage('¡Paciente registrado con éxito!', 'success');
         this.patientForm.reset();
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error al registrar:', error);
-        const message = error.error?.message || 'Error al registrar el paciente';
-        this.showMessage(`${message}`, 'error');
+        const errorMsg = error.error?.message || 'No se pudo registrar el paciente';
+        this.showMessage('Error: ' + errorMsg, 'error');
         this.isLoading = false;
       }
     });
@@ -118,11 +122,12 @@ export class PatientRegisterComponent {
 
   onReset() {
     this.patientForm.reset();
+    this.showMessage('Formulario vacio', 'success');
   }
 
   private showMessage(message: string, type: 'success' | 'error') {
     this.snackBar.open(message, 'Cerrar', {
-      duration: 5000,
+      duration: 4000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
       panelClass: type === 'success' ? 'snackbar-success' : 'snackbar-error'
