@@ -1,13 +1,26 @@
 <mat-toolbar class="navbar">
   <div class="brand">
-    <mat-icon class="logo" aria-hidden="true">local_florist</mat-icon>
-    <span>Sarah</span>
+    <mat-icon class="logo" aria-hidden="true">pregnant_woman</mat-icon>
+    <span routerLink="/">Sarah</span>
   </div>
   
   <div>
-      <a mat-button routerLink="/">Home</a>
-      <a mat-button routerLink="/tests/epds">EPDS</a>
-      <a mat-button routerLink="/tests/anrq">ANRQ</a>
-      <a mat-button routerLink="/tests/pass">PASS</a>
-    </div>
+    <button mat-button>
+      <span routerLink="/">Home</span>
+    </button>
+    <button mat-button routerLink="/about">About</button>
+    <button matButton [matMenuTriggerFor]="menu">Tests</button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <span><a mat-button routerLink="/tests/epds">EPDS</a></span>
+      </button>
+      <button mat-menu-item>
+        <span><a mat-button routerLink="/tests/anrq">ANRQ</a></span>
+      </button>
+      <button mat-menu-item>
+        <span><a mat-button routerLink="/tests/pass">PASS</a></span>
+      </button>
+    </mat-menu>
+  </div>
 </mat-toolbar>
