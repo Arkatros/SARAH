@@ -11,7 +11,6 @@ export interface CreatePatientDTO {
   midWifeId: number;
   
   // Opcionales
-  password?: string;
   dateOfBirth?: string | Date;
   ethnicity?: string;
   residentialStatus?: string;

@@ -7,7 +7,7 @@ import SarahError from "../utils/sarahError.js";
  */
 export const registerPatientController = async (req, res) => {
   try {
-    const { name, lastName, email, phone, password, midWifeId, ...patientData } = req.body;
+    const { name, lastName, email, phone, midWifeId, ...patientData } = req.body;
 
     // Validaciones de campos obligatorios
     if (!name || !lastName || !email || !phone) {
@@ -24,7 +24,7 @@ export const registerPatientController = async (req, res) => {
       });
     }
 
-    const userData = { name, lastName, email, phone, password };
+    const userData = { name, lastName, email, phone };
     const patientDataComplete = { ...patientData, midWifeId: parseInt(midWifeId) };
     
     const patient = await service.registerPatient(userData, patientDataComplete);

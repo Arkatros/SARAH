@@ -6,7 +6,7 @@ import SarahError from "../utils/sarahError.js";
 
 /**
  * Registra un nuevo paciente en el sistema
- * @param {Object} userData - Datos del usuario (name, lastName, email, phone, password)
+ * @param {Object} userData - Datos del usuario (name, lastName, email, phone)
  * @param {Object} patientData - Datos específicos del paciente
  * @param {number} patientData.midWifeId - ID de la midwife asignada
  * @returns {Promise} Paciente creado
@@ -23,18 +23,9 @@ export const registerPatient = async (userData, patientData = {}) => {
     throw new SarahError("El email ya está registrado en el sistema", 400);
   }
 
-  // Hash de la contraseña si se proporciona
-  let hashedPassword = null;
-  if (userData.password) {
-    hashedPassword = await bcrypt.hash(userData.password, 10);
-  }
-
-  // Crear el paciente
+  // Crear el paciente (sin contraseña)
   const patient = await patientRepository.createPatient({
-    userData: {
-      ...userData,
-      password: hashedPassword,
-    },
+    userData,
     patientData,
   });
 
@@ -105,11 +96,6 @@ export const updatePatient = async (patientId, patientData) => {
  * @returns {Promise} Usuario actualizado
  */
 export const updatePatientUser = async (userId, userData) => {
-  // Si hay contraseña, hashearla
-  if (userData.password) {
-    userData.password = await bcrypt.hash(userData.password, 10);
-  }
-
   return await patientRepository.updatePatientUser(userId, userData);
 };
 

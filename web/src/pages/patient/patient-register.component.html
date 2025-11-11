@@ -1,7 +1,7 @@
 <div class="container">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Registro de paciente</mat-card-title>
+      <mat-card-title>Patient registration</mat-card-title>
     </mat-card-header>
     
     <hr class="linea-gradiente">
@@ -11,16 +11,16 @@
         
         <!-- Datos personales -->
         <div class="section">
-          <h3 class="section-title">Datos personales</h3>
+          <h3 class="section-title">Personal information</h3>
           
           <div class="form-row">
             <mat-form-field>
-              <mat-label>Nombre *</mat-label>
+              <mat-label>First name *</mat-label>
               <input matInput formControlName="name">
             </mat-form-field>
 
             <mat-form-field>
-              <mat-label>Apellido *</mat-label>
+              <mat-label>Last name *</mat-label>
               <input matInput formControlName="lastName">
             </mat-form-field>
           </div>
@@ -32,39 +32,34 @@
             </mat-form-field>
 
             <mat-form-field>
-              <mat-label>Teléfono *</mat-label>
+              <mat-label>Phone *</mat-label>
               <input matInput formControlName="phone">
             </mat-form-field>
           </div>
 
           <div class="form-row">
             <mat-form-field>
-              <mat-label>Contraseña</mat-label>
-              <input matInput type="password" formControlName="password">
-            </mat-form-field>
-
-            <mat-form-field>
-              <mat-label>ID partera *</mat-label>
-              <input matInput type="number" formControlName="midWifeId">
+              <mat-label>Midwife id *</mat-label>
+              <input matInput type="number" formControlName="midWifeId" readonly>
             </mat-form-field>
           </div>
 
           <div class="form-row">
             <mat-form-field>
-              <mat-label>Fecha de nacimiento</mat-label>
+              <mat-label>Date of birth</mat-label>
               <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
               <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
             <mat-form-field>
-              <mat-label>Etnia</mat-label>
+              <mat-label>Ethnicity</mat-label>
               <input matInput formControlName="ethnicity">
             </mat-form-field>
           </div>
 
           <mat-form-field class="full-width">
-            <mat-label>Estado residencial</mat-label>
+            <mat-label>Residential status</mat-label>
             <input matInput formControlName="residentialStatus">
           </mat-form-field>
         </div>
@@ -73,16 +68,16 @@
 
         <!-- Datos pareja -->
         <div class="section">
-          <h3 class="section-title">Datos de la pareja (Opcional)</h3>
+          <h3 class="section-title">Partner information (optional)</h3>
           
           <div class="form-row">
             <mat-form-field>
-              <mat-label>Nombre de la pareja</mat-label>
+              <mat-label>Partner's name</mat-label>
               <input matInput formControlName="partnerName">
             </mat-form-field>
 
             <mat-form-field>
-              <mat-label>Fecha de nacimiento</mat-label>
+              <mat-label>Date of birth</mat-label>
               <input matInput [matDatepicker]="partnerPicker" formControlName="partnerDateOfBirth">
               <mat-datepicker-toggle matIconSuffix [for]="partnerPicker"></mat-datepicker-toggle>
               <mat-datepicker #partnerPicker></mat-datepicker>
@@ -90,18 +85,18 @@
           </div>
 
           <mat-form-field class="full-width">
-            <mat-label>Dirección de la pareja</mat-label>
+            <mat-label>Partner's address</mat-label>
             <input matInput formControlName="partnerAddress">
           </mat-form-field>
 
           <div class="form-row">
             <mat-form-field>
-              <mat-label>Email de la pareja</mat-label>
+              <mat-label>Partner's email</mat-label>
               <input matInput type="email" formControlName="partnerEmail">
             </mat-form-field>
 
             <mat-form-field>
-              <mat-label>Teléfono de la pareja</mat-label>
+              <mat-label>Partner's phone</mat-label>
               <input matInput formControlName="partnerPhone">
             </mat-form-field>
           </div>
@@ -111,21 +106,21 @@
 
         <!-- Datos médico -->
         <div class="section">
-          <h3 class="section-title">Médico de cabecera (Opcional)</h3>
+          <h3 class="section-title">General practitioner (optional)</h3>
           
           <mat-form-field class="full-width">
-            <mat-label>Nombre del médico</mat-label>
+            <mat-label>GP name</mat-label>
             <input matInput formControlName="GPName">
           </mat-form-field>
 
           <div class="form-row">
             <mat-form-field>
-              <mat-label>Email del médico</mat-label>
+              <mat-label>GP email</mat-label>
               <input matInput type="email" formControlName="GPEmail">
             </mat-form-field>
 
             <mat-form-field>
-              <mat-label>Teléfono del médico</mat-label>
+              <mat-label>GP phone</mat-label>
               <input matInput formControlName="GPPhone">
             </mat-form-field>
           </div>
@@ -133,14 +128,14 @@
 
         <div class="button-row">
           <button mat-raised-button type="button" (click)="onReset()" [disabled]="isLoading">
-            Limpiar
+            Clear
           </button>
           
           <button mat-raised-button type="submit" class="btn-primary" [disabled]="isLoading || !patientForm.valid">
             @if(isLoading) {
               <mat-spinner diameter="20"></mat-spinner>
             } @else {
-            <span>Registrar paciente</span>
+            <span>Register patient</span>
             }
           </button>
         </div>

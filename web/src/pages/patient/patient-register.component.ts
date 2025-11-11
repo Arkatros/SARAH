@@ -52,7 +52,6 @@ export class PatientRegisterComponent {
       midWifeId: ['', Validators.required],
       
       // Opcionales del paciente
-      password: [''],
       dateOfBirth: [''],
       ethnicity: [''],
       residentialStatus: [''],
@@ -74,7 +73,7 @@ export class PatientRegisterComponent {
   onSubmit() {
     // Validamos el form
     if (this.patientForm.invalid) {
-      this.showMessage('Por favor complete los campos obligatorios (*)', 'error');
+      this.showMessage('Please complete the required fields (*)', 'error');
       return;
     }
 
@@ -93,7 +92,6 @@ export class PatientRegisterComponent {
     };
 
     // campos opcionales
-    if (formValues.password) patientData.password = formValues.password;
     if (formValues.dateOfBirth) patientData.dateOfBirth = formValues.dateOfBirth;
     if (formValues.ethnicity) patientData.ethnicity = formValues.ethnicity;
     if (formValues.residentialStatus) patientData.residentialStatus = formValues.residentialStatus;
@@ -108,12 +106,12 @@ export class PatientRegisterComponent {
 
     this.patientService.registerPatient(patientData).subscribe({
       next: (response) => {
-        this.showMessage('¡Paciente registrado con éxito!', 'success');
+        this.showMessage('¡Patient successfully registered!', 'success');
         this.patientForm.reset();
         this.isLoading = false;
       },
       error: (error) => {
-        const errorMsg = error.error?.message || 'No se pudo registrar el paciente';
+        const errorMsg = error.error?.message || 'The patient could not be registered';
         this.showMessage('Error: ' + errorMsg, 'error');
         this.isLoading = false;
       }
@@ -122,11 +120,11 @@ export class PatientRegisterComponent {
 
   onReset() {
     this.patientForm.reset();
-    this.showMessage('Formulario vacio', 'success');
+    this.showMessage('Empty form', 'success');
   }
 
   private showMessage(message: string, type: 'success' | 'error') {
-    this.snackBar.open(message, 'Cerrar', {
+    this.snackBar.open(message, 'Close', {
       duration: 4000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
