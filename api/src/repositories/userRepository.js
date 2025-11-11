@@ -15,3 +15,4 @@ export async function findByEmail(email) {
 export async function findByEmailAndRole(email, role) {
   return prisma.user.findUnique({ where: { email, role } });
 }
+

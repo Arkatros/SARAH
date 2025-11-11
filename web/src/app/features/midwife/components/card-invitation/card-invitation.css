@@ -1,0 +1,58 @@
+:host {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.invitation-card {
+  border-radius: 12px;
+  padding: 20px 24px;
+  background: var(--sarah-soft-light);
+  color: var(--sarah-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.icon {
+  background: #ffffffb0;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-text h3 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.title-text p {
+  margin: 2px 0 0 0;
+  color: #5e35b1;
+  font-size: 0.9rem;
+}
+
+.form-section {
+  margin-top: 4px;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .title-text h3 {
+    font-size: 1rem;
+  }
+  .title-text p {
+    font-size: 0.8rem;
+  }
+}

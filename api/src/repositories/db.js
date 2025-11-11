@@ -1,4 +1,4 @@
-import { PrismaClient } from "../../generated/prisma/index.js";
+import { PrismaClient } from "../../generated/prisma/client.ts";
 import { config } from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
