@@ -1,0 +1,164 @@
+<div class="container">
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon class="title-icon">person_add</mat-icon>
+        Registro de paciente
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+        
+        <!-- Datos Personales -->
+        <div class="section">
+          <h3 class="section-title">Datos personales</h3>
+          
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Nombre *</mat-label>
+              <input matInput formControlName="name" placeholder="Ingrese el nombre">
+              <mat-icon matPrefix>person</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Apellido *</mat-label>
+              <input matInput formControlName="lastName" placeholder="Ingrese el apellido">
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Email *</mat-label>
+              <input matInput type="email" formControlName="email" placeholder="ejemplo@mail.com">
+              <mat-icon matPrefix>email</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Teléfono *</mat-label>
+              <input matInput formControlName="phone" placeholder="+54 911 1234-5678">
+              <mat-icon matPrefix>phone</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Contraseña</mat-label>
+              <input matInput type="password" formControlName="password" placeholder="Opcional">
+              <mat-icon matPrefix>lock</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>ID Partera *</mat-label>
+              <input matInput type="number" formControlName="midWifeId" placeholder="Ingrese ID">
+              <mat-icon matPrefix>badge</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Fecha de nacimiento</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+              <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Etnia</mat-label>
+              <input matInput formControlName="ethnicity" placeholder="Opcional">
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Estado residencial</mat-label>
+            <input matInput formControlName="residentialStatus" placeholder="Propietaria, alquiler, etc.">
+            <mat-icon matPrefix>home</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <hr class="linea-gradiente">
+
+        <!-- Datos de la Pareja -->
+        <div class="section">
+          <h3 class="section-title">Datos de la pareja (Opcional)</h3>
+          
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Nombre de la pareja</mat-label>
+              <input matInput formControlName="partnerName" placeholder="Nombre completo">
+              <mat-icon matPrefix>people</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Fecha de nacimiento</mat-label>
+              <input matInput [matDatepicker]="partnerPicker" formControlName="partnerDateOfBirth">
+              <mat-datepicker-toggle matIconPrefix [for]="partnerPicker"></mat-datepicker-toggle>
+              <mat-datepicker #partnerPicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Dirección de la pareja</mat-label>
+            <input matInput formControlName="partnerAddress" placeholder="Calle, número, ciudad">
+            <mat-icon matPrefix>location_on</mat-icon>
+          </mat-form-field>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Email de la pareja</mat-label>
+              <input matInput type="email" formControlName="partnerEmail" placeholder="email@ejemplo.com">
+              <mat-icon matPrefix>email</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Teléfono de la pareja</mat-label>
+              <input matInput formControlName="partnerPhone" placeholder="+54 911 1234-5678">
+              <mat-icon matPrefix>phone</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <hr class="linea-gradiente">
+
+        <!-- Datos del Médico -->
+        <div class="section">
+          <h3 class="section-title">Médico de cabecera (Opcional)</h3>
+          
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nombre del médico</mat-label>
+            <input matInput formControlName="GPName" placeholder="Dr./Dra. Nombre Apellido">
+            <mat-icon matPrefix>local_hospital</mat-icon>
+          </mat-form-field>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Email del médico</mat-label>
+              <input matInput type="email" formControlName="GPEmail" placeholder="medico@hospital.com">
+              <mat-icon matPrefix>email</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Teléfono del médico</mat-label>
+              <input matInput formControlName="GPPhone" placeholder="+54 911 1234-5678">
+              <mat-icon matPrefix>phone</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="button-row">
+          <button mat-raised-button type="button" (click)="onReset()" class="btn-secondary">
+            <mat-icon>refresh</mat-icon>
+            Limpiar
+          </button>
+          
+          <button mat-raised-button type="submit" class="btn-primary" [disabled]="!patientForm.valid">
+            <mat-icon>save</mat-icon>
+            Registrar paciente
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
