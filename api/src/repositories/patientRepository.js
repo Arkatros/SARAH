@@ -35,7 +35,7 @@ export const createPatient = async ({ userData, patientData }) => {
           lastName: userData.lastName,
           email: userData.email,
           phone: userData.phone,
-          password: userData.password || null,
+          password: null,
           role: "PATIENT",
         },
       },
