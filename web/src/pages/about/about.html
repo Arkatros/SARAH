@@ -1,0 +1,31 @@
+<section class="about-wrapper">
+  <mat-card class="about-card" appearance="outlined">
+    <mat-card-header>
+      <div mat-card-avatar class="about-avatar">
+        <mat-icon aria-hidden="true">local_florist</mat-icon>
+      </div>
+      <mat-card-title>{{ instituto }}</mat-card-title>
+      <mat-card-subtitle>{{ carrera }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+      <h3>Integrantes</h3>
+      <div class="chips">
+        <mat-chip-set>
+          @for (persona of team; track persona) {
+            <mat-chip>
+                {{ persona }}
+            </mat-chip>
+        }
+        </mat-chip-set>
+      </div>
+
+      <div class="mini">
+        <mat-icon aria-hidden="true">school</mat-icon>
+        <span>Presentación de Back/Front - 2025</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>
