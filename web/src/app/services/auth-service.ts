@@ -2,12 +2,16 @@ import { inject, Injectable } from '@angular/core';
 import { UserPayload } from '../../core/models/jwt-payload';
 import { BehaviorSubject, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { LoginModel } from '../features/auth/models/login-model';
+import { ApiResponse } from '../../core/models/api-response';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private tokenKey: string = "";
+  apiUrl: string = environment.apiUrl;
+  private tokenKey: string = "token";
   private tokenInMemory: string | null = null;
   private currentUserSubject = new BehaviorSubject<UserPayload | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
@@ -20,25 +24,23 @@ export class AuthService {
     }
   }
 
-  login(credentials: { username: string; password: string }) {
-    return this._http.post<{ accessToken: string }>('api/auth/login', credentials)
-      .pipe(
-        tap(resp => this.setToken(resp.accessToken))
-      );
+  login(credentials: LoginModel) {
+    return this._http.post<ApiResponse<string>>(`${this.apiUrl}/users/login`, credentials);
   }
 
   logout() {
     this.clearToken();
   }
 
-  private setToken(token: string) {
+  public setToken(token: string) {
+    this.clearToken();
     this.tokenInMemory = token;
     localStorage.setItem(this.tokenKey, token);
     const payload = this.decodeToken();
     this.currentUserSubject.next(payload);
   }
 
-  private clearToken() {
+  public clearToken() {
     this.tokenInMemory = null;
     localStorage.removeItem(this.tokenKey);
     this.currentUserSubject.next(null);
@@ -57,7 +59,7 @@ export class AuthService {
 
   decodeToken(): UserPayload | null {
     try {
-      const parts = this.tokenKey.split('.');
+      const parts = this.getToken()!.split('.');
       if (parts.length !== 3) return null;
       const payload = atob(parts[1].replace(/-/g, '+').replace(/_/g, '/'));
       return JSON.parse(decodeURIComponent(escape(payload)));

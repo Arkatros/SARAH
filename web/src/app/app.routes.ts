@@ -6,17 +6,18 @@ import { PASS } from '../pages/tests/pass/pass';
 import { NotFound } from '../pages/not-found/not-found';
 import { AdminDashboard } from './features/admin/pages/admin-dashboard/admin-dashboard';
 import { MidwifeDashboard } from './features/midwife/pages/midwife-dashboard/midwife-dashboard';
+import { Roles } from '../core/models/roles';
+import { authGuard } from './guards/auth-guard';
+import { roleGuard } from './guards/role-guard';
+import { Login } from './features/auth/pages/login/login';
 
 export const routes: Routes = [
     { path: "", component: Home },
     { path: "tests/anrq", component: ANRQ },
     { path: "tests/epds", component: EPDS },
     { path: "tests/pass", component: PASS },
-    { path: 'admin', component: AdminDashboard },
-    { path: 'midwife', component: MidwifeDashboard },
-    /*
-    { path: 'admin', component: AdminDashboard, canActivate: [authGuard, roleGuard], data: { roles: [Roles.ADMIN] } },
-    { path: 'midwife', component: MidwifeDashboard, canActivate: [authGuard, roleGuard], data: { roles: [Roles.MIDWIFE] } },
-    */
+    { path: 'admin', component: AdminDashboard,  canActivate: [authGuard, roleGuard], data: { requiredRole: Roles.ADMIN } },
+    { path: 'midwife', component: MidwifeDashboard, canActivate: [authGuard, roleGuard], data: { requiredRole: Roles.MIDWIFE } },
+    { path: 'login', component: Login, canDeactivate: [authGuard]},
     { path: '**', component: NotFound }
 ];
