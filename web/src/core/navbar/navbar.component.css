@@ -18,6 +18,10 @@
   letter-spacing:.3px;
 }
 
+.brand:hover{
+  cursor: pointer;
+}
+
 .logo{
   color: var(--nav-ink);
 }

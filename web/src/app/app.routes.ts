@@ -6,6 +6,7 @@ import { PASS } from '../pages/tests/pass/pass';
 import { NotFound } from '../pages/not-found/not-found';
 import { AdminDashboard } from './features/admin/pages/admin-dashboard/admin-dashboard';
 import { MidwifeDashboard } from './features/midwife/pages/midwife-dashboard/midwife-dashboard';
+import { PatientRegisterComponent } from '../pages/patient/patient-register.component';
 
 export const routes: Routes = [
     { path: "", component: Home },
@@ -19,4 +20,6 @@ export const routes: Routes = [
     { path: 'midwife', component: MidwifeDashboard, canActivate: [authGuard, roleGuard], data: { roles: [Roles.MIDWIFE] } },
     */
     { path: '**', component: NotFound }
+    { path: "patient/register", component: PatientRegisterComponent },
+    { path: '**', component: NotFound } // <---- Si van a registrar rutas, esta DEBE SER LA ULTIMA EN LA LISTA SIEMPRE
 ];
