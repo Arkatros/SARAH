@@ -1,5 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  AbstractControl,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { LoginModel } from '../models/login-model';
@@ -7,19 +13,13 @@ import { AuthService } from '../../../services/auth-service';
 import { Router } from '@angular/router';
 import { Roles } from '../../../../core/models/roles';
 import { MatButton } from '@angular/material/button';
+import { MatCard } from '@angular/material/card';
 
 @Component({
   selector: 'app-login-form',
-  imports: [
-    MatFormField,
-    MatInput,
-    MatLabel,
-    ReactiveFormsModule,
-    MatError,
-    MatButton
-  ],
+  imports: [MatFormField, MatInput, MatLabel, ReactiveFormsModule, MatError, MatButton, MatCard],
   templateUrl: './login-form.html',
-  styleUrl: './login-form.css'
+  styleUrl: './login-form.css',
 })
 export class LoginForm {
   public form: FormGroup;
@@ -29,7 +29,7 @@ export class LoginForm {
   constructor(private _formBuilder: FormBuilder) {
     this.form = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
-      password: ['', [Validators.required, Validators.maxLength(15)]]
+      password: ['', [Validators.required, Validators.maxLength(15)]],
     });
   }
 
@@ -41,7 +41,7 @@ export class LoginForm {
           this._authService.clearToken();
           this._authService.setToken(response.data!);
           this.openSnackBar(response.message, 'Close');
-          this._authService.currentUser$.subscribe(user => {
+          this._authService.currentUser$.subscribe((user) => {
             if (user?.role === Roles.ADMIN) {
               this._router.navigate(['/admin']);
             } else if (user?.role === Roles.MIDWIFE) {
@@ -52,7 +52,7 @@ export class LoginForm {
         error: (error) => {
           console.error('Error login attempt:', error.message);
           this.openSnackBar(error.message, 'Close');
-        }
+        },
       });
     }
   }
