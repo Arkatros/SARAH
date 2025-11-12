@@ -1,4 +1,4 @@
-import { PrismaClient } from "../../generated/prisma/client.ts";
+import { PrismaClient } from "@prisma/client";
 import { config } from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -10,6 +10,5 @@ config({ path: path.resolve(__dirname, "../../.env") });
 let prisma = new PrismaClient({
   errorFormat: "pretty",
 });
-
 
 export default prisma;
