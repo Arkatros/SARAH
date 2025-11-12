@@ -1,43 +1,78 @@
-form
-{
-    width: 100%;
-    min-width: 320px;
-    padding: 0 15px;
-    box-sizing: border-box;
+
+.login-card {
+  background-color: var(--sarah-soft);
+  box-shadow: var(--card-shadow);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 700px;
+  margin: 40px auto;
 }
 
-.form-row {
+.form-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--sarah-ink);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+
+.full-width {
+  width: 100%;
+}
+
+form {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* Cuando la pantalla es ancha (por ejemplo > 768px), se ponen en fila */
-@media (min-width: 768px) {
-  .form-row {
-    flex-direction: row;
-    gap: 24px;
-  }
-
-  .form-row .full-width {
-    flex: 1;
-  }
-}
-
-/* Asegura que los mat-error queden debajo y no dentro del input */
 mat-form-field {
   width: 100%;
+}
 
-  .mat-mdc-form-field-subscript-wrapper {
-    position: static !important;
+.button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+button {
+  min-width: 150px;
+  background-color: var(--sarah-primary);
+  color: white;
+}
+
+/* Errores */
+mat-error {
+  font-size: 12px;
+  color: #f44336;
+}
+
+@media (max-width: 768px) {
+  .login-card {
+    margin: 20px;
+    padding: 24px;
+      margin: 40px auto;
+  }
+}
+@media (min-width: 600px) and (max-width: 1200px) {
+  .login-card {
+    max-width: 550px;
+    padding: 40px;
+  }
+}
+@media (min-width: 1600px) {
+  .login-card {
+    max-width: 700px;
+    padding: 48px 56px;
   }
 
-  .mat-mdc-form-field-error-wrapper {
-    margin-top: 4px;
+  .form-title {
+    font-size: 2rem;
   }
 
-  mat-error {
-    font-size: 12px;
-    color: #f44336;
+  button {
+    font-size: 1.1rem;
+    padding: 12px 24px;
   }
 }
