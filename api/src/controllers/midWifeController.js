@@ -1,6 +1,5 @@
 import * as Service from "../services/midWifeService.js";
 import SaraError from "../utils/sarahError.js";
-
 export const CreateMidwife = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*"); // o lista de orígenes
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
@@ -16,12 +15,9 @@ export const CreateMidwife = async (req, res) => {
     if (error instanceof SaraError) {
       return res.status(409).json({ message: error.message, data: error });
     }
-    return res
-      .status(500)
-      .json({ message: error.message , data: error });
+    return res.status(500).json({ message: error.message, data: error });
   }
 };
-
 
 
 export const activateUserController = async (req, res) => {

@@ -24,6 +24,8 @@ export class ANRQ implements OnInit {
     });
   }
 
+
+  //Método para "marcar" las preguntas que deben abrir subquestions si se pone "yes"
   protected showSub(q: TestQuestion): boolean {
     const ans = this.answers['q-' + q.number];
     if (ans == null) return false;
