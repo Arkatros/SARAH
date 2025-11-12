@@ -1,12 +1,14 @@
-<section *ngIf="loaded(); else loading">
-  <h2>PASS</h2>
-  <div *ngFor="let q of questions()">
-    <h3>{{ q.number }}. {{ q.description }}</h3>
-    <div>
-      <label *ngFor="let r of q.responses">
-        <input type="radio" name="q-{{ q.number }}" [value]="r.value" [(ngModel)]="answers['q-'+q.number]" />
-        {{ r.description }}
-      </label>
+<section class="test-wrapper" *ngIf="loaded(); else loading">
+  <h2 class="test-title">Perinatal Anxiety Screening Scale (PASS)</h2>
+  <div class="test-card">
+    <div class="question" *ngFor="let q of questions()">
+      <h3><span [innerHTML]="q.number + '. ' + q.description"></span></h3>
+      <div class="options">
+        <label *ngFor="let r of q.responses">
+          <input type="radio" name="q-{{ q.number }}" [value]="r.value" [(ngModel)]="answers['q-'+q.number]" />
+          {{ r.description }}
+        </label>
+      </div>
     </div>
   </div>
 </section>

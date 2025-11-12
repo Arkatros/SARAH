@@ -6,12 +6,13 @@ import { PASS } from '../pages/tests/pass/pass';
 import { NotFound } from '../pages/not-found/not-found';
 import { AdminDashboard } from './features/admin/pages/admin-dashboard/admin-dashboard';
 import { MidwifeDashboard } from './features/midwife/pages/midwife-dashboard/midwife-dashboard';
-import { Roles } from '../core/models/roles';
+import { PatientRegisterComponent } from '../pages/patient/patient-register.component';
+import { Login } from './features/auth/pages/login/login';
 import { authGuard } from './guards/auth-guard';
 import { roleGuard } from './guards/role-guard';
-import { Login } from './features/auth/pages/login/login';
+import { Roles } from '../core/models/roles';
 import { About } from '../pages/about/about';
-import { PatientRegisterComponent } from '../pages/patient/patient-register.component';
+
 
 export const routes: Routes = [
     { path: "", component: Home },
