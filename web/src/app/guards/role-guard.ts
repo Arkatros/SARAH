@@ -14,9 +14,11 @@ export const roleGuard: CanActivateFn = (route, state) => {
 
   authService.currentUser$.subscribe(user => {
     if(!user || user.role !== requiredRole)
+    {
       router.navigate(['**']);
       return false;
+    }
+    return true;
   });
-
   return true;
 };

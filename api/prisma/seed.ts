@@ -1,7 +1,9 @@
 /// <reference types="node" />
+import bcrypt from 'bcryptjs';
 import { PrismaClient } from '../generated/prisma/client.ts';
 import { promises as fs } from 'fs';
 import path from 'path';
+import { generatePassword } from '../src/utils/passgen.js';
 
 type SeedResponse = {
   description: string;
@@ -125,6 +127,26 @@ async function seedFromFile(jsonPath: string) {
   }
 }
 
+async function ensureAdminUser() {
+  const salt = await bcrypt.genSalt(10);
+
+  const hashedPassword = await bcrypt.hash("admin", salt);
+  const existingAdmin = await prisma.user.findFirst({ where: { email: 'admin@mail.com' } });
+  if (existingAdmin) {
+    return;
+  }
+  await prisma.user.create({
+    data: {
+      email: 'admin@mail.com',
+      name: 'Admin',
+      role: 'ADMIN',
+      lastName: '',
+      phone: '',
+      password: hashedPassword
+  }
+  });
+}
+
 async function main() {
   const testsDir = path.resolve(process.cwd(), 'tests');
   const entries = await fs.readdir(testsDir, { withFileTypes: true });
@@ -141,6 +163,8 @@ async function main() {
     console.log(`Seeding from: ${path.basename(file)}`);
     await seedFromFile(file);
   }
+
+  await ensureAdminUser();
 }
 
 main()

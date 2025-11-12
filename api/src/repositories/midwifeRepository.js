@@ -32,6 +32,18 @@ export const findByEmail = async (email) => {
   return prisma.user.findUnique({ where: { email } });
 };
 
+export const isActiveMidwife = async (email) => {
+  const userWithMidwife = await prisma.user.findUnique({
+    where: { email },
+    include: {
+      midwife: true
+    }
+  })
+  if (userWithMidwife.midwife.isActive){
+    return true
+  }
+  return false
+}
 export const findByEmailMidwife = async (email) => {
   const userWithMidwife = await prisma.user.findUnique({
     where: { email },

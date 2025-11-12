@@ -13,6 +13,6 @@ export class PatientService {
   private _httpClient: HttpClient = inject(HttpClient);
 
   invitePatient(invitation: InvitePatientModel) : Observable<ApiResponse<null>> {
-    return this._httpClient.post<ApiResponse<null>>(`${this.apiUrl}/users/patient/invite`, { invitation });
+    return this._httpClient.post<ApiResponse<null>>(`${this.apiUrl}/users/patient/invite`, invitation);
   }
 }

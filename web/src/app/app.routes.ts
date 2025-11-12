@@ -7,18 +7,22 @@ import { NotFound } from '../pages/not-found/not-found';
 import { AdminDashboard } from './features/admin/pages/admin-dashboard/admin-dashboard';
 import { MidwifeDashboard } from './features/midwife/pages/midwife-dashboard/midwife-dashboard';
 import { PatientRegisterComponent } from '../pages/patient/patient-register.component';
+import { Login } from './features/auth/pages/login/login';
+import { authGuard } from './guards/auth-guard';
+import { roleGuard } from './guards/role-guard';
+import { Roles } from '../core/models/roles';
+import { About } from '../pages/about/about';
+
 
 export const routes: Routes = [
     { path: "", component: Home },
     { path: "tests/anrq", component: ANRQ },
     { path: "tests/epds", component: EPDS },
     { path: "tests/pass", component: PASS },
-    { path: 'admin', component: AdminDashboard },
-    { path: 'midwife', component: MidwifeDashboard },
-    /*
-    { path: 'admin', component: AdminDashboard, canActivate: [authGuard, roleGuard], data: { roles: [Roles.ADMIN] } },
-    { path: 'midwife', component: MidwifeDashboard, canActivate: [authGuard, roleGuard], data: { roles: [Roles.MIDWIFE] } },
-    */
+    { path: 'admin', component: AdminDashboard,  canActivate: [authGuard, roleGuard], data: { requiredRole: Roles.ADMIN } },
+    { path: 'midwife', component: MidwifeDashboard, canActivate: [authGuard, roleGuard], data: { requiredRole: Roles.MIDWIFE } },
+    { path: 'login', component: Login},
+    { path: "about", component: About },
     { path: "patient/register", component: PatientRegisterComponent },
     { path: '**', component: NotFound } // <---- Si van a registrar rutas, esta DEBE SER LA ULTIMA EN LA LISTA SIEMPRE
 ];

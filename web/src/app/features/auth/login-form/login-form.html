@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Patient Email</mat-label>
+      <input placeholder="example@mail.com" matInput type="email" formControlName="email" maxlength="50" />
+      @if (getControl('email')?.touched && getControl('email')?.invalid) {
+      @if (getControl('email')?.hasError('required')) {
+      <mat-error>Email is required.</mat-error>
+      }
+      @if (getControl('email')?.hasError('email')) {
+      <mat-error>Invalid email format.</mat-error>
+      }
+      }
+    </mat-form-field>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Password</mat-label>
+    <input matInput type="text" formControlName="password" maxlength="50" />
+    @if (getControl('password')?.touched && getControl('password')?.invalid) {
+    @if (getControl('password')?.hasError('required')) {
+    <mat-error>Password is required.</mat-error>
+    }
+    }
+  </mat-form-field>
+  <div style="margin-top: 20px;">
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+      Send Invitation
+    </button>
+  </div>
+</form>
