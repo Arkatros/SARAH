@@ -1,4 +1,5 @@
-import { UserPayload } from '../../../../core/models/jwt-payload';
+import { UserPayload } from "../../../core/models/jwt-payload";
+
 
 export interface InvitePatientModel {
   name: string;

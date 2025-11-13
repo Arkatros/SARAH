@@ -1,17 +1,17 @@
 import { Routes } from '@angular/router';
-import { Home } from '../pages/home/home';
-import { ANRQ } from '../pages/tests/anrq/anrq';
-import { EPDS } from '../pages/tests/epds/epds';
-import { PASS } from '../pages/tests/pass/pass';
-import { NotFound } from '../pages/not-found/not-found';
+import { Home } from './pages/home/home';
+import { ANRQ } from './pages/tests/anrq/anrq';
+import { EPDS } from './pages/tests/epds/epds';
+import { PASS } from './pages/tests/pass/pass';
+import { NotFound } from './pages/not-found/not-found';
 import { AdminDashboard } from './features/admin/pages/admin-dashboard/admin-dashboard';
 import { MidwifeDashboard } from './features/midwife/pages/midwife-dashboard/midwife-dashboard';
-import { PatientRegisterComponent } from '../pages/patient/patient-register.component';
+import { PatientRegisterComponent } from './pages/patient/patient-register.component';
 import { Login } from './features/auth/pages/login/login';
 import { authGuard } from './guards/auth-guard';
 import { roleGuard } from './guards/role-guard';
-import { Roles } from '../core/models/roles';
-import { About } from '../pages/about/about';
+import { Roles } from './core/models/roles';
+import { About } from './pages/about/about';
 import { guestGuard } from './guards/guest-guard';
 
 export const routes: Routes = [

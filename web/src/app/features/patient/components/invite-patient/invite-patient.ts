@@ -9,10 +9,10 @@ import {
 import { MatButton } from '@angular/material/button';
 import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { PatientService } from '../../../../services/patient-service';
+import { PatientService } from '../../../../core/services/patient.service';
 import { InvitePatientModel } from '../../models/invite-patient-model';
-import { AuthService } from '../../../../services/auth-service';
-import { UserPayload } from '../../../../../core/models/jwt-payload';
+import { AuthService } from '../../../../core/services/auth-service';
+import { UserPayload } from '../../../../core/models/jwt-payload';
 @Component({
   selector: 'app-invite-patient',
   imports: [MatFormField, MatLabel, MatInput, MatError, MatButton, ReactiveFormsModule],

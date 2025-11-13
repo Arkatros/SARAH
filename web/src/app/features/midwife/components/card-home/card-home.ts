@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { AuthService } from '../../../../services/auth-service';
+import { AuthService } from '../../../../core/services/auth-service';
 import { MatCard } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 
