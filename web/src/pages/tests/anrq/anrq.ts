@@ -16,6 +16,8 @@ export class ANRQ implements OnInit {
   protected readonly answers: Record<string, number> = {};
   protected readonly extra: { q8_sexual: boolean; q8_physical: boolean } = { q8_sexual: false, q8_physical: false };
   protected readonly multi: Record<string, boolean> = {};
+  protected readonly score = signal<number | null>(null);
+  protected readonly showingScore = signal<boolean>(false);
 
   ngOnInit(): void {
     this.api.getQuestions('ANRQ').subscribe({
@@ -55,5 +57,23 @@ export class ANRQ implements OnInit {
     if (!n || n < 1) return '';
     const code = 'a'.charCodeAt(0) + (n - 1);
     return String.fromCharCode(code);
+  }
+
+  protected submit(): void {
+    const v = Math.floor(Math.random() * 11);
+    this.score.set(v);
+    this.showingScore.set(true);
+  }
+
+  protected closeScore(): void {
+    this.showingScore.set(false);
+  }
+
+  protected scoreClass(): string {
+    const v = this.score();
+    if (v == null) return '';
+    if (v < 4) return 'low';
+    if (v < 7) return 'mid';
+    return 'high';
   }
 }

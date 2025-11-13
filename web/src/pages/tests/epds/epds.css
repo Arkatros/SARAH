@@ -75,3 +75,17 @@
 }
 .options input[type="radio"] { accent-color: var(--epds-accent); }
 
+.actions { margin-top: 16px; }
+.submit-btn {
+  padding: 8px 14px; border: 0; border-radius: 6px;
+  background: var(--epds-accent); color: #fff; cursor: pointer;
+}
+.score-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+.score-modal { min-width: 260px; border-radius: 10px; padding: 18px; color: #fff; text-align: center; }
+.score-modal.low { background: #e53935; }
+.score-modal.mid { background: #fdd835; color: #333; }
+.score-modal.high { background: #43a047; }
+.score-value { font-size: 32px; margin: 6px 0 12px 0; }
+.close-btn { padding: 6px 10px; border: 0; border-radius: 4px; background: rgba(255,255,255,0.2); color: #fff; cursor: pointer; }
+.score-modal.mid .close-btn { background: rgba(0,0,0,0.12); color: #333; }
+

@@ -21,5 +21,16 @@
       </div>
     </div>
   </div>
+  <div class="actions">
+    <button class="submit-btn" (click)="submit()">Submit</button>
+  </div>
 </section>
 <ng-template #loading><p>Loading...</p></ng-template>
+
+<div class="score-backdrop" *ngIf="showingScore()" (click)="closeScore()">
+  <div class="score-modal" [ngClass]="scoreClass()" (click)="$event.stopPropagation()">
+    <h3>Score</h3>
+    <p class="score-value">{{ score() }}</p>
+    <button class="close-btn" (click)="closeScore()">Close</button>
+  </div>
+</div>

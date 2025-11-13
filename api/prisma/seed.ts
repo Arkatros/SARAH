@@ -1,6 +1,5 @@
 /// <reference types="node" />
 import bcrypt from "bcryptjs";
-
 import { promises as fs } from "fs";
 import path from "path";
 import { PrismaClient } from "@prisma/client";
@@ -163,6 +162,75 @@ async function ensureAdminUser() {
   });
 }
 
+async function ensureUser(params: {
+  email: string;
+  name: string;
+  lastName?: string;
+  phone?: string;
+  role?: string;
+  password?: string;
+}) {
+  const existing = await prisma.user.findUnique({ where: { email: params.email } });
+  if (existing) return existing;
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(params.password ?? "password", salt);
+  return prisma.user.create({
+    data: {
+      email: params.email,
+      name: params.name,
+      lastName: params.lastName ?? "",
+      phone: params.phone ?? "",
+      role: params.role ?? "USER",
+      password: hashedPassword,
+    },
+  });
+}
+
+async function ensureMidwifeWithUser() {
+  const user = await ensureUser({
+    email: "midwife@mail.com",
+    name: "Martha",
+    lastName: "Midwife",
+    phone: "555-0001",
+    role: "MIDWIFE",
+  });
+
+  const existing = await prisma.midwife.findFirst({ where: { userId: user.id } });
+  if (existing) return existing;
+
+  return prisma.midwife.create({
+    data: {
+      APC: "APC-12345",
+      registrationNumber: "REG-67890",
+      employerName: "Community Clinic",
+      isActive: true,
+      userId: user.id,
+    },
+  });
+}
+
+async function ensurePatientWithUser(midwifeId: number) {
+  const user = await ensureUser({
+    email: "patient@mail.com",
+    name: "Paula",
+    lastName: "Patient",
+    phone: "555-0002",
+    role: "PATIENT",
+  });
+
+  const existing = await prisma.patient.findFirst({ where: { userId: user.id } });
+  if (existing) return existing;
+
+  return prisma.patient.create({
+    data: {
+      isActive: true,
+      userId: user.id,
+      midWifeId: midwifeId,
+      // opcionales pueden quedar null
+    },
+  });
+}
+
 async function main() {
   const testsDir = path.resolve(process.cwd(), "tests");
   const entries = await fs.readdir(testsDir, { withFileTypes: true });
@@ -183,6 +251,10 @@ async function main() {
   }
 
   await ensureAdminUser();
+
+  // Midwife + Patient de ejemplo
+  const midwife = await ensureMidwifeWithUser();
+  await ensurePatientWithUser(midwife.id);
 }
 
 main()

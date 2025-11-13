@@ -26,9 +26,21 @@ cd SARAH
 cd api && npm i && cd .. && cd web && npm i && cd ..
 ```
 
+### 1.2. Crear la base de datos y configurar conexión
+
+En SQL server crear la base de datos del proyecto.
+Configurar SQL Server para que permita la conexión por IP al puerto 1433:
+Habilitar TCP/IP y fijar puerto:
+[ ] SQL Server Configuration Manager → Protocols → habilitar TCP/IP.
+[ ] En IPAll: borrar “TCP Dynamic Ports” y poner TCP Port = 1433.
+[ ] Reiniciar el servicio y abrir el puerto en firewall si aplica.
+
+Generar la cadena de conexión con el siguiente formato:
+[ ] "sqlserver://localhost:1433;database={SARAH};user={sa};password={pasword de sa};encrypt=true;trustServerCertificate=true" (prisma, el orm, no soporta Windows Authenticatio, por eso debe ser con user y pass la conection string)
+
 ### 2. Configuración de variables de entorno
 
-Crear un archivo `.env` en la carpeta raíz del proyecto y llenarlo con las siguientes variables.
+Crear un archivo `.env` en la carpeta raíz de la api y llenarlo con las siguientes variables.
 
 * **`DATABASE_URL`**: URL de conexión a la base de datos SQL Server.
     * Ejemplo: `DATABASE_URL="sqlserver:HOST:PORT;database=DATABASE;user=USER;password=PASSWORD;encrypt=true;trustServerCertificate=true"`
@@ -51,11 +63,11 @@ Ejecutar el siguiente comando para generar el cliente Prisma, aplicar las migrac
 ```bash
 cd api && npx prisma generate && npx prisma migrate dev && npx prisma db seed
 ```
+
 ## Iniciar aplicación
 ### Backend (API)
 
 ```bash
-cd api
 npm start 
 ```
 ### Frontend (Web)
