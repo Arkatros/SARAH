@@ -1,0 +1,49 @@
+:root {
+  --pass-accent: #333b4f;
+  --pass-muted: #f4f7fb;
+  --pass-border: #dee6f3;
+}
+
+.test-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.test-card {
+  background: #fff;
+  border: 1px solid var(--pass-border);
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.test-title {
+  color: var(--pass-accent);
+  margin: 0 0 12px 0;
+  font-weight: 600;
+}
+
+.question { padding: 12px 0; border-top: 1px dashed var(--pass-border); }
+.question:first-child { border-top: none; }
+.question h3 { margin: 0 0 8px 0; font-size: 16px; }
+
+.options { display: flex; flex-wrap: wrap; gap: 10px 16px; }
+.options label {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 10px; border: 1px solid var(--pass-border);
+  border-radius: 6px; background: var(--pass-muted);
+}
+.options input[type="radio"] { accent-color: var(--pass-accent); }
+
+.actions { margin-top: 16px; }
+.submit-btn { padding: 8px 14px; border: 0; border-radius: 6px; background: var(--pass-accent); color: #fff; cursor: pointer; }
+.score-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+.score-modal { min-width: 260px; border-radius: 10px; padding: 18px; color: #fff; text-align: center; }
+.score-modal.low { background: #e53935; }
+.score-modal.mid { background: #fdd835; color: #333; }
+.score-modal.high { background: #43a047; }
+.score-value { font-size: 32px; margin: 6px 0 12px 0; }
+.close-btn { padding: 6px 10px; border: 0; border-radius: 4px; background: rgba(255,255,255,0.2); color: #fff; cursor: pointer; }
+.score-modal.mid .close-btn { background: rgba(0,0,0,0.12); color: #333; }
+

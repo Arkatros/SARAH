@@ -1,0 +1,68 @@
+.about-wrapper {
+  min-height: 70dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px 12px;
+}
+
+.about-card {
+  width: min(900px, 92%);
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+  background: #fff;
+  display: flex;
+  justify-content: center;
+}
+
+.about-avatar {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--nav-bg), var(--sarah-soft));
+  color: var(--nav-ink);
+}
+
+mat-card-title {
+  font-weight: 700;
+  color: var(--sarah-ink);
+}
+
+mat-card-subtitle {
+  color: var(--nav-ink);
+  opacity: .9;
+}
+
+.intro {
+  margin: 16px 0;
+  color: var(--sarah-ink);
+}
+
+h3 {
+  margin: 16px 0 8px;
+  color: var(--sarah-primary);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.person-chip mat-icon {
+  margin-right: 6px;
+  color: var(--sarah-primary);
+}
+
+.mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: .95rem;
+  color: var(--sarah-ink);
+}
+
+.mini mat-icon {
+  color: var(--nav-ink);
+}

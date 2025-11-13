@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+/* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+
+:root{
+  --nav-bg:  rgb(240,166,221);
+  --nav-ink: rgb(184, 28,150);
+  --sarah-primary: var(--nav-ink);
+  --sarah-soft-light: #fde9f7; 
+  --sarah-soft: #fff0fa;
+  --sarah-ink:  #3b2f2f;
+  --card-shadow: 0 10px 24px rgba(0,0,0,.06);
+}
+
+body {
+  color: var(--sarah-ink);
+  font-family: Roboto, sans-serif;
+}
+
+.linea-gradiente {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border: none; 
+  height: 1px;
+  background: linear-gradient(to right, transparent, #ccc 20%, #ccc 80%, transparent);
+}
+
+app-midwife-dashboard mat-card{
+    box-shadow: var(--card-shadow);
+}

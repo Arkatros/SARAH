@@ -1,0 +1,43 @@
+{
+  "testCode": "PASS",
+  "defaultResponses": [
+    { "description": "Not at all", "value": 0 },
+    { "description": "Sometimes", "value": 1 },
+    { "description": "Often", "value": 2 },
+    { "description": "Almost Always", "value": 3 }
+  ],
+  "questions": [
+    { "number": 1, "description": "Worry about the baby/pregnancy" },
+    { "number": 2, "description": "Fear that harm will come to the baby" },
+    { "number": 3, "description": "A sense of dread that something bad is going to happen" },
+    { "number": 4, "description": "Worry about many things" },
+    { "number": 5, "description": "Worry about the future" },
+    { "number": 6, "description": "Feeling overwhelmed" },
+    { "number": 7, "description": "Really strong fears about things, eg needles, blood, birth, pain, etc" },
+    { "number": 8, "description": "Sudden rushes of extreme fear or discomfort" },
+    { "number": 9, "description": "Repetitive thoughts that are difficult to stop or control" },
+    { "number": 10, "description": "Difficulty sleeping even when I have the chance to sleep" },
+    { "number": 11, "description": "Having to do things in a certain way or order" },
+    { "number": 12, "description": "Wanting things to be perfect" },
+    { "number": 13, "description": "Needing to be in control of things" },
+    { "number": 14, "description": "Difficulty stopping checking or doing things over and over" },
+    { "number": 15, "description": "Feeling jumpy or easily startled" },
+    { "number": 16, "description": "Concerns about repeated thoughts" },
+    { "number": 17, "description": "Being 'on guard' or needing to watch out for things" },
+    { "number": 18, "description": "Upset about repeated memories, dreams or nightmares" },
+    { "number": 19, "description": "Worry that I will embarrass myself in front of others" },
+    { "number": 20, "description": "Fear that others will judge me negatively" },
+    { "number": 21, "description": "Feeling really uneasy in crowds" },
+    { "number": 22, "description": "Avoiding social activities because I might be nervous" },
+    { "number": 23, "description": "Avoiding things which concern me" },
+    { "number": 24, "description": "Feeling detached like you're watching yourself in a movie" },
+    { "number": 25, "description": "Losing track of time and can't remember what happened" },
+    { "number": 26, "description": "Difficulty adjusting to recent changes" },
+    { "number": 27, "description": "Anxiety getting in the way of being able to do things" },
+    { "number": 28, "description": "Racing thoughts making it hard to concentrate" },
+    { "number": 29, "description": "Fear of losing control" },
+    { "number": 30, "description": "Feeling panicky" },
+    { "number": 31, "description": "Feeling agitated" }
+  ]
+}
+

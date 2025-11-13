@@ -1,0 +1,167 @@
+{
+  "testCode": "ANRQ",
+  "questions": [
+    {
+      "number": 1,
+      "description": "Have you ever had a period of 2 weeks or more when you felt particularly worried, miserable or depressed?",
+      "responses": [
+        { "description": "No", "value": 0 },
+        { "description": "Yes", "value": 5 }
+      ],
+      "subquestions": [
+        {
+          "subquestionNumber": 1,
+          "description": "Seriously interfere with your work and your relationships with friends or family?",
+          "responses": [
+            { "description": "Not at all", "value": 1 },
+            { "description": "A little", "value": 2 },
+            { "description": "Somewhat", "value": 3 },
+            { "description": "Quite a lot", "value": 4 },
+            { "description": "Very much", "value": 5 }
+          ]
+        },
+        {
+          "subquestionNumber": 2,
+          "description": "Lead you to seek professional help?",
+          "responses": [
+            { "description": "No", "value": 0 },
+            { "description": "Yes", "value": 5 }
+          ],
+          "subquestions": [
+            {
+                "subquestionNumber": 1,
+                "description": "Did you see a:",
+                "responses": [
+                    { "description": "psychiatrist", "value": 0 },
+                    { "description": "psychologist/counsellor", "value": 0 },
+                    { "description": "GP", "value": 0 }
+                ]
+            },
+            {
+                "subquestionNumber": 2,
+                "description": "Did you take tablets/herbal medicine?",
+                "responses": [
+                    { "description": "No", "value": 0 },
+                    { "description": "Yes", "value": 0 }
+                ]
+            }
+          ]
+        },
+        {
+          "subquestionNumber": 3,
+          "description": "Do you have <b><u>any other history of mental health problems?</u></b> (e.g. eating disorders, psychosis, bipolar, schizophrenia)",
+          "responses": [
+            { "description": "No", "value": 0 },
+            { "description": "Yes", "value": 5 }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "description": "Is your relationship with your partner an emotionally supportive one?",
+      "responses": [
+        { "description": "Very much", "value": 1 },
+        { "description": "Quite a lot", "value": 2 },
+        { "description": "Somewhat", "value": 3 },
+        { "description": "A little", "value": 4 },
+        { "description": "Not at all", "value": 5 },
+        { "description": "No partner", "value": 5 }
+      ]
+    },
+    {
+      "number": 3,
+      "description": "Have you had any stresses, changes or losses in the last 12 months? (e.g. separation, domestic violence, job loss, bereavement etc.)",
+      "responses": [
+        { "description": "No", "value": 0 },
+        { "description": "Yes", "value": 5 }
+      ],
+      "subquestions": [
+        {
+          "subquestionNumber": 1,
+          "description": "How distressed were you by these stresses, changes or losses?",
+          "responses": [
+            { "description": "Not at all", "value": 1 },
+            { "description": "A little", "value": 2 },
+            { "description": "Somewhat", "value": 3 },
+            { "description": "Quite a lot", "value": 4 },
+            { "description": "Very much", "value": 5 }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "description": "Would you generally consider yourself a worrier?",
+      "responses": [
+        { "description": "Not at all", "value": 1 },
+            { "description": "A little", "value": 2 },
+            { "description": "Somewhat", "value": 3 },
+            { "description": "Quite a lot", "value": 4 },
+            { "description": "Very much", "value": 5 }
+      ]
+    },
+    {
+      "number": 5,
+      "description": "In general, do you become upset if you do not have order in your life? (e.g. regular timetable, tidy house)",
+      "responses": [
+        { "description": "Not at all", "value": 1 },
+        { "description": "A little", "value": 2 },
+        { "description": "Somewhat", "value": 3 },
+        { "description": "Quite a lot", "value": 4 },
+        { "description": "Very much", "value": 5 }
+      ]
+    },
+    {
+      "number": 6,
+      "description": "Do you feel you will have people you can depend on for support with your baby?",
+      "responses": [
+        { "description": "Very much", "value": 1 },
+        { "description": "Quite a lot", "value": 2 },
+        { "description": "Somewhat", "value": 3 },
+        { "description": "A little", "value": 4 },
+        { "description": "Not at all", "value": 5 },
+        { "description": "No partner", "value": 5 }
+      ]
+    },
+    {
+      "number": 7,
+      "description": "Were you emotionally abused when you were growing up?",
+      "responses": [
+        { "description": "No", "value": 0 },
+        { "description": "Yes", "value": 5 }
+      ]
+    },
+    {
+      "number": 8,
+      "description": "Have you <b>ever</b> been sexually or physically abused?",
+      "responses": [
+        { "description": "No", "value": 0 },
+        { "description": "Yes", "value": 5 }
+      ],
+      "subquestions": [
+        {
+          "subquestionNumber": 1,
+          "description": "",
+          "responses": [
+            { "description": "sexually", "value": 0 },
+            { "description": "physically", "value": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "description": "When you were growing up, did you feel your mother was emotionally supportive of you?",
+      "responses": [
+        { "description": "Very much", "value": 1 },
+        { "description": "Quite a lot", "value": 2 },
+        { "description": "Somewhat", "value": 3 },
+        { "description": "A little", "value": 4 },
+        { "description": "Not at all", "value": 5 },
+        { "description": "No Mother", "value": 5 }
+      ]
+    }
+  ]
+}
+
