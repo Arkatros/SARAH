@@ -1,5 +1,8 @@
 import { findByEmail } from "../repositories/userRepository.js";
-import { findByEmailMidwife, isActiveMidwife } from "../repositories/midwifeRepository.js"
+import {
+  findByEmailMidwife,
+  isActiveMidwife,
+} from "../repositories/midwifeRepository.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import SarahError from "../utils/sarahError.js";
@@ -12,8 +15,8 @@ export const loginMidwife = async (data) => {
   if (!filteredUser) {
     throw new SarahError("No se encuentra ningun usuario con esos datos");
   }
-  if (filteredUser.role === 'MIDWIFE') {
-    const isActive = await isActiveMidwife(data.email)
+  if (filteredUser.role === "MIDWIFE") {
+    const isActive = await isActiveMidwife(data.email);
     if (!isActive) {
       return null;
     }
@@ -22,11 +25,11 @@ export const loginMidwife = async (data) => {
   await bcrypt.compare(data.password, filteredUser.password);
 
   const payload = {
-    userid: filteredUser.id,
+    id: filteredUser.id,
     mail: data.email,
     role: filteredUser.role,
     name: filteredUser.name,
-    lastName: filteredUser.lastName
+    lastName: filteredUser.lastName,
   };
 
   console.log(payload);

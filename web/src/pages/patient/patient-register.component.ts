@@ -12,6 +12,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PatientService } from '../../core/services/patient.service';
 import { CreatePatientDTO } from '../../models/patient.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient-register',
@@ -27,47 +28,66 @@ import { CreatePatientDTO } from '../../models/patient.model';
     MatNativeDateModule,
     MatIconModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   templateUrl: './patient-register.component.html',
-  styleUrls: ['./patient-register.component.css']
+  styleUrls: ['./patient-register.component.css'],
 })
-
 export class PatientRegisterComponent {
   patientForm: FormGroup;
   isLoading = false;
-  
+
   private fb = inject(FormBuilder);
   private patientService = inject(PatientService);
   private snackBar = inject(MatSnackBar);
-
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
   constructor() {
-    // Creamos el form
     this.patientForm = this.fb.group({
-      // Datos requeridos
       name: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
-      midWifeId: ['', Validators.required],
-      
-      // Opcionales del paciente
+      midWifeId: [''], // sin Validators.required
+
       dateOfBirth: [''],
       ethnicity: [''],
       residentialStatus: [''],
-      
-      // Opcionales de la pareja
       partnerName: [''],
       partnerDateOfBirth: [''],
       partnerAddress: [''],
       partnerEmail: [''],
       partnerPhone: [''],
-      
-      // Opcionales del médico
       GPName: [''],
       GPEmail: [''],
-      GPPhone: ['']
+      GPPhone: [''],
     });
+
+    const encodedData = this.route.snapshot.paramMap.get('encodedData');
+
+    if (encodedData) {
+      try {
+        const [encodedMidwifeId, encodedEmail, encodedName] = encodedData.split('___');
+        const midwifeId = atob(encodedMidwifeId);
+        const email = atob(encodedEmail);
+        const name = atob(encodedName);
+        console.log(midwifeId);
+
+        // Rellenar el form
+        this.patientForm.patchValue({
+          name: name,
+          midWifeId: midwifeId,
+          email: email,
+        });
+
+        // Deshabilitar midwifeId y recalcular validación general
+        this.patientForm.get('midWifeId')?.disable({ emitEvent: false });
+        this.patientForm.updateValueAndValidity({ onlySelf: false, emitEvent: true });
+      } catch (error) {
+        console.error('Error decoding invite data', error);
+        this.showMessage('Invalid or corrupted invitation link.', 'error');
+      }
+    }
   }
 
   onSubmit() {
@@ -78,17 +98,17 @@ export class PatientRegisterComponent {
     }
 
     this.isLoading = true;
-    
+
     // Obtenemos todos los valores del formulario
-    const formValues = this.patientForm.value;
-    
+    const formValues = this.patientForm.getRawValue();
+
     // Crear objeto con datos obligatorios
     const patientData: CreatePatientDTO = {
       name: formValues.name,
       lastName: formValues.lastName,
       email: formValues.email,
       phone: formValues.phone,
-      midWifeId: Number(formValues.midWifeId)
+      midWifeId: Number(formValues.midWifeId),
     };
 
     // campos opcionales
@@ -96,7 +116,8 @@ export class PatientRegisterComponent {
     if (formValues.ethnicity) patientData.ethnicity = formValues.ethnicity;
     if (formValues.residentialStatus) patientData.residentialStatus = formValues.residentialStatus;
     if (formValues.partnerName) patientData.partnerName = formValues.partnerName;
-    if (formValues.partnerDateOfBirth) patientData.partnerDateOfBirth = formValues.partnerDateOfBirth;
+    if (formValues.partnerDateOfBirth)
+      patientData.partnerDateOfBirth = formValues.partnerDateOfBirth;
     if (formValues.partnerAddress) patientData.partnerAddress = formValues.partnerAddress;
     if (formValues.partnerEmail) patientData.partnerEmail = formValues.partnerEmail;
     if (formValues.partnerPhone) patientData.partnerPhone = formValues.partnerPhone;
@@ -109,12 +130,13 @@ export class PatientRegisterComponent {
         this.showMessage('¡Patient successfully registered!', 'success');
         this.patientForm.reset();
         this.isLoading = false;
+        this.router.navigate(['/']);
       },
       error: (error) => {
         const errorMsg = error.error?.message || 'The patient could not be registered';
         this.showMessage('Error: ' + errorMsg, 'error');
         this.isLoading = false;
-      }
+      },
     });
   }
 
@@ -128,7 +150,7 @@ export class PatientRegisterComponent {
       duration: 4000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
-      panelClass: type === 'success' ? 'snackbar-success' : 'snackbar-error'
+      panelClass: type === 'success' ? 'snackbar-success' : 'snackbar-error',
     });
   }
 }

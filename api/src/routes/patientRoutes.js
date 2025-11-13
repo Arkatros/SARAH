@@ -7,13 +7,14 @@ import {
   getPatientByEmailController,
   updatePatientController,
   invitePatientController,
-} from "../controllers/patientController.js";
+} from "../controllers/PatientController.js";
+import { verificarToken } from "../middleware/jwtmiddleware.js";
 
 const router = Router();
 
 // Rutas públicas
 router.post("/register", registerPatientController);
-router.post("/invite", invitePatientController);
+// router.post("/invite",verificarToken("MIDWIFE") ,invitePatientController);
 
 // Rutas para obtener pacientes
 router.get("/", getAllPatientsController);
