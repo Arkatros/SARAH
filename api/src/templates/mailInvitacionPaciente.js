@@ -8,11 +8,21 @@
  * @param {string} inviteUrl - URL de invitación
  * @returns {string} HTML del email
  */
-export function generatePatientInviteHtml(patientName, inviteUrl) {
+
+export function generatePatientInviteHtml(
+  patientName,
+  inviteUrl,
+  safeMidwifeId,
+  safePatientMail
+) {
   // seguridad básica: si vienen undefined/null convertimos a string vacía
   const safeName = String(patientName ?? "");
-  const safeUrl = String(inviteUrl ?? "#");
-
+  let safeUrl = String(inviteUrl ?? "#");
+  const encodedMidwifeId = encodeURIComponent(btoa(safeMidwifeId));
+  const encodedEmail = encodeURIComponent(btoa(safePatientMail));
+  const encodedName = encodeURIComponent(btoa(patientName));
+  safeUrl =
+    safeUrl + encodedMidwifeId + "___" + encodedEmail + "___" + encodedName;
   // HTML + CSS embebido. Incluye un "banner" SVG clickable que redirige a safeUrl.
   return `
   <!doctype html>
@@ -83,7 +93,7 @@ export function generatePatientInviteHtml(patientName, inviteUrl) {
         width: fit-content;
         margin: 18px auto 0;
         text-decoration:none;
-        background: linear-gradient(180deg,var(--accent),var(--accent-dark));
+        background-color:black;
         color: #fff;
         padding: 12px 20px;
         border-radius: 10px;
@@ -158,7 +168,9 @@ export function generatePatientInviteHtml(patientName, inviteUrl) {
 
           <p class="note">
             Si el botón anterior no funciona, copia y pega el siguiente enlace en tu navegador:<br/>
-            <span style="word-break:break-all;">${escapeHtml(safeUrl)}</span>
+            <a href="${escapeAttr(safeUrl)}" target="_blank" >
+              ${escapeAttr(safeUrl)}
+            </a>
           </p>
         </div>
 
@@ -199,4 +211,3 @@ function escapeAttr(str) {
   // además de escapar HTML, también re-encodifica comillas
   return escapeHtml(str).replace(/"/g, "&quot;");
 }
-

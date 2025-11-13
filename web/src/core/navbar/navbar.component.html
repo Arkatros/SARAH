@@ -3,7 +3,7 @@
     <mat-icon class="logo" aria-hidden="true">pregnant_woman</mat-icon>
     <span routerLink="/">Sarah</span>
   </div>
-  
+
   <div>
     <button mat-button>
       <span routerLink="/">Home</span>
@@ -22,5 +22,11 @@
         <span><a mat-button routerLink="/tests/pass">PASS</a></span>
       </button>
     </mat-menu>
+    @if (islogged) {
+    <button matButton (click)="logOut()">LogOut</button>
+    }
+    @else{
+    <button matButton routerLink="/login">Login</button>
+    }
   </div>
 </mat-toolbar>

@@ -1,6 +1,8 @@
 import { genericSendMail } from "./mailService.js";
 import { generatePatientInviteHtml } from "../templates/mailInvitacionPaciente.js";
 import * as patientRepository from "../repositories/patientRepository.js";
+import { findMidwifeByUserId } from "../repositories/midwifeRepository.js";
+
 import bcrypt from "bcryptjs";
 import SarahError from "../utils/sarahError.js";
 
@@ -22,8 +24,7 @@ export const registerPatient = async (userData, patientData = {}) => {
   if (existingPatient) {
     throw new SarahError("El email ya está registrado en el sistema", 400);
   }
-
-  // Crear el paciente (sin contraseña)
+  patientData.midWifeId = (await findMidwifeByUserId(patientData.midWifeId)).id;
   const patient = await patientRepository.createPatient({
     userData,
     patientData,
@@ -115,9 +116,19 @@ export const existsPatientEmail = async (email) => {
  * @param {string} inviteUrl - URL de invitación
  * @returns {Promise} Resultado del envío
  */
-export async function sendPatientInviteEmail(toEmail, patientName, inviteUrl) {
+export async function sendPatientInviteEmail(
+  toEmail,
+  patientName,
+  inviteUrl,
+  midWifeId
+) {
   const subject = `Invitación para completar el test`;
-  const htmlBody = generatePatientInviteHtml(patientName, inviteUrl);
+  const htmlBody = generatePatientInviteHtml(
+    patientName,
+    inviteUrl,
+    midWifeId,
+    toEmail
+  );
   const result = await genericSendMail(toEmail, subject, htmlBody);
   return result;
 }

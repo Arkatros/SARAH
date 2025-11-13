@@ -1,13 +1,15 @@
 import * as service from "../services/patientService.js";
 import SarahError from "../utils/sarahError.js";
 
+const urlToRegisterPatient = "http://localhost:4200/patient/register/";
 /**
  * Registra un nuevo paciente en el sistema
  * POST /api/patients/register
  */
 export const registerPatientController = async (req, res) => {
   try {
-    const { name, lastName, email, phone, midWifeId, ...patientData } = req.body;
+    const { name, lastName, email, phone, midWifeId, ...patientData } =
+      req.body;
 
     // Validaciones de campos obligatorios
     if (!name || !lastName || !email || !phone) {
@@ -25,9 +27,15 @@ export const registerPatientController = async (req, res) => {
     }
 
     const userData = { name, lastName, email, phone };
-    const patientDataComplete = { ...patientData, midWifeId: parseInt(midWifeId) };
-    
-    const patient = await service.registerPatient(userData, patientDataComplete);
+    const patientDataComplete = {
+      ...patientData,
+      midWifeId: parseInt(midWifeId),
+    };
+    console.log(patientData);
+    const patient = await service.registerPatient(
+      userData,
+      patientDataComplete
+    );
 
     return res.status(201).json({
       message: "Paciente registrado con éxito",
@@ -41,23 +49,25 @@ export const registerPatientController = async (req, res) => {
           email: patient.user.email,
           phone: patient.user.phone,
         },
-        midWife: patient.midWife ? {
-          id: patient.midWife.id,
-          APC: patient.midWife.APC,
-        } : null,
+        midWife: patient.midWife
+          ? {
+              id: patient.midWife.id,
+              APC: patient.midWife.APC,
+            }
+          : null,
       },
     });
   } catch (error) {
     if (error instanceof SarahError) {
-      return res.status(error.statusCode || 400).json({ 
-        message: error.message, 
-        data: null 
+      return res.status(error.statusCode || 400).json({
+        message: error.message,
+        data: null,
       });
     }
     console.error("Error en registerPatientController:", error);
-    return res.status(500).json({ 
-      message: "Error interno del servidor", 
-      data: null 
+    return res.status(500).json({
+      message: "Error interno del servidor",
+      data: null,
     });
   }
 };
@@ -75,9 +85,9 @@ export const getAllPatientsController = async (req, res) => {
     });
   } catch (error) {
     console.error("Error en getAllPatientsController:", error);
-    return res.status(500).json({ 
-      message: "Error al obtener pacientes", 
-      data: null 
+    return res.status(500).json({
+      message: "Error al obtener pacientes",
+      data: null,
     });
   }
 };
@@ -95,9 +105,9 @@ export const getActivePatientsController = async (req, res) => {
     });
   } catch (error) {
     console.error("Error en getActivePatientsController:", error);
-    return res.status(500).json({ 
-      message: "Error al obtener pacientes activos", 
-      data: null 
+    return res.status(500).json({
+      message: "Error al obtener pacientes activos",
+      data: null,
     });
   }
 };
@@ -123,15 +133,15 @@ export const getPatientByIdController = async (req, res) => {
     });
   } catch (error) {
     if (error instanceof SarahError) {
-      return res.status(error.statusCode || 400).json({ 
-        message: error.message, 
-        data: null 
+      return res.status(error.statusCode || 400).json({
+        message: error.message,
+        data: null,
       });
     }
     console.error("Error en getPatientByIdController:", error);
-    return res.status(500).json({ 
-      message: "Error al obtener paciente", 
-      data: null 
+    return res.status(500).json({
+      message: "Error al obtener paciente",
+      data: null,
     });
   }
 };
@@ -150,15 +160,15 @@ export const getPatientByEmailController = async (req, res) => {
     });
   } catch (error) {
     if (error instanceof SarahError) {
-      return res.status(error.statusCode || 400).json({ 
-        message: error.message, 
-        data: null 
+      return res.status(error.statusCode || 400).json({
+        message: error.message,
+        data: null,
       });
     }
     console.error("Error en getPatientByEmailController:", error);
-    return res.status(500).json({ 
-      message: "Error al obtener paciente", 
-      data: null 
+    return res.status(500).json({
+      message: "Error al obtener paciente",
+      data: null,
     });
   }
 };
@@ -188,15 +198,15 @@ export const updatePatientController = async (req, res) => {
     });
   } catch (error) {
     if (error instanceof SarahError) {
-      return res.status(error.statusCode || 400).json({ 
-        message: error.message, 
-        data: null 
+      return res.status(error.statusCode || 400).json({
+        message: error.message,
+        data: null,
       });
     }
     console.error("Error en updatePatientController:", error);
-    return res.status(500).json({ 
-      message: "Error al actualizar paciente", 
-      data: null 
+    return res.status(500).json({
+      message: "Error al actualizar paciente",
+      data: null,
     });
   }
 };
@@ -218,7 +228,7 @@ export const invitePatientController = async (req, res) => {
 
     // Verificar si el email ya está registrado
     const emailExists = await service.existsPatientEmail(request.email);
-    
+
     if (emailExists) {
       return res.status(409).json({
         message: "El email ya está registrado en el sistema",
@@ -230,7 +240,8 @@ export const invitePatientController = async (req, res) => {
     await service.sendPatientInviteEmail(
       request.email,
       request.name,
-      request.inviteUrl || "URL AL FORMULARIO"
+      urlToRegisterPatient || "URL AL FORMULARIO",
+      req.user.id
     );
 
     return res.status(200).json({
@@ -239,15 +250,15 @@ export const invitePatientController = async (req, res) => {
     });
   } catch (error) {
     if (error instanceof SarahError) {
-      return res.status(error.statusCode || 400).json({ 
-        message: error.message, 
-        data: null 
+      return res.status(error.statusCode || 400).json({
+        message: error.message,
+        data: null,
       });
     }
     console.error("Error en invitePatientController:", error);
-    return res.status(500).json({ 
-      message: "Error al enviar invitación", 
-      data: null 
+    return res.status(500).json({
+      message: "Error al enviar invitación",
+      data: null,
     });
   }
 };
