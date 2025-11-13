@@ -4,7 +4,7 @@ import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { CreateMidWife } from '../../models/create-midwife';
-import { MidwifeService } from '../../../../services/midwife-service';
+import { MidwifeService } from '../../../../core/services/midwife-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({

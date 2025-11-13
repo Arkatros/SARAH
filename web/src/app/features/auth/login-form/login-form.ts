@@ -9,9 +9,9 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { LoginModel } from '../models/login-model';
-import { AuthService } from '../../../services/auth-service';
+import { AuthService } from '../../../core/services/auth-service';
 import { Router } from '@angular/router';
-import { Roles } from '../../../../core/models/roles';
+import { Roles } from '../../../core/models/roles';
 import { MatButton } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
 

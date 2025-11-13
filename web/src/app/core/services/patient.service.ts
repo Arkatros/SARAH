@@ -2,14 +2,17 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CreatePatientDTO, Patient, ApiResponse } from '../../models/patient.model';
+import { CreatePatientDTO, Patient, ApiResponse } from '../models/patient.model';
+import { InvitePatientModel } from '../../features/patient/models/invite-patient-model';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://127.0.0.1:3000/api/patients';
+  private apiUrlBase = environment.apiUrl;
+  private apiUrl = `${this.apiUrlBase}/patients`;
 
   /**
    * Registra un nuevo paciente
@@ -51,6 +54,10 @@ export class PatientService {
     ).pipe(
       map(response => response.data)
     );
+  }
+
+  invitePatient(invitation: InvitePatientModel): Observable<ApiResponse<null>> {
+    return this.http.post<ApiResponse<null>>(`${this.apiUrlBase}/users/patient/invite`, invitation);
   }
 }
 

@@ -11,8 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PatientService } from '../../core/services/patient.service';
-import { CreatePatientDTO } from '../../models/patient.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CreatePatientDTO } from '../../core/models/patient.model';
 
 @Component({
   selector: 'app-patient-register',

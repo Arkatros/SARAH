@@ -2,9 +2,9 @@ import { inject, Injectable } from '@angular/core';
 import { UserPayload } from '../../core/models/jwt-payload';
 import { BehaviorSubject, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { LoginModel } from '../features/auth/models/login-model';
+import { LoginModel } from '../../features/auth/models/login-model';
 import { ApiResponse } from '../../core/models/api-response';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'

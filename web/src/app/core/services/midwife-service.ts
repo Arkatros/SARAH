@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { CreateMidWife } from '../features/midwife/models/create-midwife';
-import { environment } from '../../environments/environment.development';
+import { CreateMidWife } from '../../features/midwife/models/create-midwife';
+import { environment } from '../../../environments/environment.development';
 import { ApiResponse } from '../../core/models/api-response';
 import { Observable } from 'rxjs';
 
